@@ -104,6 +104,18 @@ body::after {
   animation: ripple 520ms ease-out;
 }
 
+@media (hover: none) {
+  .hover-depth:active {
+    transform: translateY(-1px) scale(0.992);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+    border-color: color-mix(in oklab, var(--accent) 30%, var(--border));
+  }
+
+  .ripple-button:active {
+    transform: scale(0.985);
+  }
+}
+
 @keyframes ripple {
   0% {
     transform: translate(-50%, -50%) scale(0);

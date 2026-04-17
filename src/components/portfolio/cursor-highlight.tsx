@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 
 export function CursorHighlight() {
   const reduceMotion = useReducedMotion();
-  const [enabled, setEnabled] = useState(false);
+  const [isPointerFine, setIsPointerFine] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -15,12 +16,14 @@ export function CursorHighlight() {
   const cursorBackground = useMotionTemplate`radial-gradient(circle, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 70%)`;
 
   useEffect(() => {
+    setMounted(true);
+
     if (reduceMotion) {
       return;
     }
 
     const media = window.matchMedia("(pointer: fine)");
-    setEnabled(media.matches);
+    setIsPointerFine(media.matches);
 
     const onMove = (event: MouseEvent) => {
       mouseX.set(event.clientX);
@@ -28,10 +31,13 @@ export function CursorHighlight() {
     };
 
     const onMediaChange = (event: MediaQueryListEvent) => {
-      setEnabled(event.matches);
+      setIsPointerFine(event.matches);
     };
 
-    window.addEventListener("mousemove", onMove, { passive: true });
+    if (media.matches) {
+      window.addEventListener("mousemove", onMove, { passive: true });
+    }
+
     media.addEventListener("change", onMediaChange);
 
     return () => {
@@ -40,14 +46,29 @@ export function CursorHighlight() {
     };
   }, [mouseX, mouseY, reduceMotion]);
 
-  if (!enabled || reduceMotion) {
+  if (!mounted || reduceMotion) {
     return null;
+  }
+
+  if (!isPointerFine) {
+    return (
+      <motion.div
+        aria-hidden
+        className="pointer-events-none fixed bottom-16 right-6 z-[5] h-24 w-24 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, color-mix(in oklab, var(--accent) 14%, transparent) 0%, transparent 72%)",
+        }}
+        animate={{ opacity: [0.16, 0.28, 0.16], scale: [0.96, 1.04, 0.96] }}
+        transition={{ duration: 4.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+      />
+    );
   }
 
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed z-[5] hidden h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full md:block"
+      className="pointer-events-none fixed z-[5] h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full"
       style={{
         left: springX,
         top: springY,
