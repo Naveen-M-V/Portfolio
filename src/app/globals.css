@@ -12,14 +12,14 @@
 }
 
 html[data-theme="light"] {
-  --background: #eef2f7;
-  --foreground: #111827;
-  --muted: #5b6473;
-  --accent: #3f5cff;
-  --surface: rgba(245, 248, 252, 0.82);
-  --surface-elevated: rgba(148, 163, 184, 0.16);
-  --border: rgba(30, 41, 59, 0.14);
-  --selection: rgba(63, 92, 255, 0.2);
+  --background: #ebe5dc;
+  --foreground: #1f2937;
+  --muted: #5f6368;
+  --accent: #5865f2;
+  --surface: rgba(231, 225, 214, 0.86);
+  --surface-elevated: rgba(120, 113, 108, 0.16);
+  --border: rgba(63, 63, 70, 0.18);
+  --selection: rgba(88, 101, 242, 0.2);
 }
 
 @theme inline {
