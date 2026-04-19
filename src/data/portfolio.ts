@@ -128,7 +128,7 @@ export function getProjectBySlug(slug: string) {
 }
 
 export const skills = {
-  languages: ["C", "C++", "Java"],
+  languages: ["C", "C++", "Java", "JavaScript"],
   workingKnowledge: ["JavaScript", "React", "Node.js", "MongoDB"],
   toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling"],
   approach: "AI-assisted development, debugging, and rapid prototyping",
