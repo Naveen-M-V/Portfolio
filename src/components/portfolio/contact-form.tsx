@@ -17,6 +17,7 @@ const defaultState: FormState = {
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(defaultState);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const onChange = (key: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -25,6 +26,7 @@ export function ContactForm() {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("loading");
+    setErrorMessage("");
 
     try {
       const response = await fetch("/api/contact", {
@@ -34,12 +36,16 @@ export function ContactForm() {
       });
 
       if (!response.ok) {
-        throw new Error("Submission failed");
+        const data = (await response.json()) as { error?: string };
+        throw new Error(data.error ?? "Submission failed");
       }
 
       setStatus("success");
       setForm(defaultState);
-    } catch {
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
       setStatus("error");
     }
   };
@@ -95,7 +101,9 @@ export function ContactForm() {
         {status === "success" ? (
           <p className="text-sm text-emerald-400">Message sent successfully.</p>
         ) : null}
-        {status === "error" ? <p className="text-sm text-red-400">Something went wrong. Try again.</p> : null}
+        {status === "error" ? (
+          <p className="text-sm text-red-400">{errorMessage || "Something went wrong. Try again."}</p>
+        ) : null}
       </div>
     </form>
   );

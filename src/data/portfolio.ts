@@ -5,7 +5,8 @@ export type Project = {
   overview: string;
   features: string[];
   tech: string[];
-  whatIDid: string[];
+  role: string[];
+  note?: string;
   challenges: string[];
 };
 
@@ -15,6 +16,7 @@ export const navItems = [
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
+  { id: "additional", label: "More" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -27,19 +29,18 @@ export const projects: Project[] = [
     overview:
       "A full-scale HR management platform designed to handle employee operations, approvals, and internal workflows with role-based access and structured dashboards.",
     features: [
-      "Employee creation and profile management",
+      "Employee profile and document management",
       "Leave and expense approval workflows",
-      "3-level hierarchical dashboards (Admin / Manager / Employee)",
-      "Document and certificate management",
+      "3-level dashboards (Admin / Manager / Employee)",
       "Integrated E-learning module",
     ],
-    tech: ["Node.js", "Express", "React", "MongoDB", "RBAC"],
-    whatIDid: [
-      "Designed backend architecture and API structure",
-      "Built role-based access control system",
-      "Managed database models and workflows",
-      "Handled system refactoring and data migration",
+    tech: ["Node.js", "Express", "MongoDB", "React", "Role-Based Access"],
+    role: [
+      "Built backend APIs and database models",
+      "Implemented role-based access",
+      "Refactored the system for scalability and real usage",
     ],
+    note: "Frontend demo with simulated data",
     challenges: [
       "Managed increasing system complexity due to evolving requirements",
       "Refactored backend structure to handle scalability",
@@ -55,16 +56,15 @@ export const projects: Project[] = [
       "A travel booking system integrating real-world flight APIs and custom package management for users.",
     features: [
       "Flight booking using Almosafer API",
-      "Custom travel package creation",
-      "Customer enquiry management dashboard",
+      "Travel package management",
+      "Customer enquiry dashboard",
       "Coupon and pricing logic",
     ],
     tech: ["Next.js", "Node.js", "REST APIs", "MongoDB", "Pricing Engine"],
-    whatIDid: [
-      "Integrated external APIs and handled responses",
-      "Built backend booking and pricing logic",
-      "Designed admin dashboard for operations",
-      "Managed real-time data handling",
+    role: [
+      "API integration and data handling",
+      "Built backend booking workflows",
+      "Developed admin dashboard features",
     ],
     challenges: [
       "Handled API inconsistencies and edge cases",
@@ -80,17 +80,16 @@ export const projects: Project[] = [
     overview:
       "A multi-role event platform enabling different types of users to host and manage events with admin approval workflows.",
     features: [
-      "Multi-user roles (Outlet Provider, Influencer, Artist, Admin)",
+      "Multi-user roles (Admin, Influencer, Artist, Provider)",
       "Event creation with pricing",
       "Admin approval system",
-      "Public ticket booking system",
+      "Ticket booking system",
     ],
-    tech: ["React", "Node.js", "Express", "MongoDB", "Access Control"],
-    whatIDid: [
-      "Designed multi-role architecture",
-      "Built event lifecycle management system",
-      "Implemented approval workflows",
-      "Managed user access and permissions",
+    tech: ["React", "Node.js", "Express", "MongoDB", "System Architecture"],
+    role: [
+      "Designed system architecture",
+      "Built event lifecycle and booking logic",
+      "Managed role-based interactions",
     ],
     challenges: [
       "Handled multiple user roles and interactions",
@@ -100,23 +99,21 @@ export const projects: Project[] = [
   },
   {
     slug: "nfc-tap-card-system",
-    title: "NFC Tap Card System (City Union Bank)",
+    title: "NFC Tap Card System",
     description:
       "An NFC-enabled digital identity platform for contact sharing through tap cards, QR codes, and dynamic links.",
     overview:
       "A digital NFC-based system enabling users to generate and share contact information through tap cards, QR codes, and dynamic links.",
     features: [
       "NFC-enabled digital card generation",
-      "QR code and link-based sharing",
+      "QR and link sharing",
       "Contact download functionality",
-      "Clean UI for user interaction",
     ],
-    tech: ["Next.js", "Node.js", "QR", "Dynamic Links", "Client Delivery"],
-    whatIDid: [
-      "Developed frontend and backend system",
-      "Implemented dynamic link generation",
-      "Built user interface for interaction",
-      "Delivered a client-ready solution",
+    tech: ["Next.js", "Node.js", "QR", "Dynamic Links", "NFC"],
+    role: [
+      "Developed frontend and backend logic",
+      "Implemented dynamic link and QR generation",
+      "Delivered a client-ready system",
     ],
     challenges: [
       "Ensured smooth user experience across devices",
@@ -131,24 +128,56 @@ export function getProjectBySlug(slug: string) {
 }
 
 export const skills = {
-  languages: ["C", "C++", "C#", "Java", "JavaScript"],
-  web: ["MongoDB", "Express", "React", "Node.js", "Next.js"],
-  tools: ["Git", "APIs", "Database Design", "System Architecture", "Unity"],
+  languages: ["C", "C++", "Java"],
+  workingKnowledge: ["JavaScript", "React", "Node.js", "MongoDB"],
+  toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling"],
+  approach: "AI-assisted development, debugging, and rapid prototyping",
 };
 
 export const experience = {
-  role: "Full Stack Developer (Startup)",
-  description:
-    "Owned backend and frontend delivery for production systems, translating evolving business requirements into stable architecture. Built APIs, role-driven workflows, and operational dashboards with a strong focus on scalability and reliability.",
+  role: "Full Stack Developer — Startup (2025 – Present)",
+  points: [
+    "Built and delivered full-stack applications for real-world clients",
+    "Developed HR systems, booking platforms, CMS tools, and fintech-related products",
+    "Worked across frontend, backend, deployment, and client coordination",
+    "Improved system reliability through debugging and backend refactoring",
+  ],
+};
+
+export const additionalExperience = [
+  {
+    title: "ImmersiveMed Solutions",
+    description:
+      "Building VR-based medical simulation systems using Unity to explore immersive healthcare training solutions.",
+  },
+  {
+    title: "IoT Minor Degree",
+    description: "Exposure to embedded systems, sensors, and hardware-software integration.",
+  },
+  {
+    title: "Leadership & Involvement",
+    description:
+      "Organized and coordinated events under YI Yuva, managing execution, logistics, and team collaboration.",
+  },
+];
+
+export const contact = {
+  text: "Let’s build something meaningful.",
 };
 
 export const personal = {
   name: "Naveen MV",
-  title: "Full Stack Developer building scalable business systems and real-world applications",
+  title: "Full Stack Developer",
+  tagline:
+    "I build real-world systems and scalable applications using modern web technologies and AI-assisted development.",
   heroDescription:
-    "I design and develop production-grade platforms including HR systems, booking platforms, SaaS CMS solutions, and interactive products. Focused on ownership, clean architecture, and systems that actually work in real environments.",
-  about:
-    "I’m a Full Stack Developer with a background in Biomedical Engineering, building scalable systems for real-world applications. I’ve worked on production-level platforms including HR systems, booking engines, SaaS CMS solutions, and fintech-related products. I focus on ownership, clean architecture, and building systems that are reliable beyond development environments.",
+    "From HR platforms to booking systems and fintech integrations, I focus on building reliable products that work in real environments.",
+  about: [
+    "I’m a Full Stack Developer with a background in Biomedical Engineering, focused on building production-grade systems for real-world use.",
+    "I’ve worked on multiple client-facing applications including HR management systems, booking platforms, CMS solutions, and NFC-based digital products. My experience involves handling both frontend and backend workflows, integrating APIs, and delivering complete systems from development to deployment.",
+    "I use AI-assisted workflows to improve development speed, explore solutions, and debug effectively, while continuously strengthening my core understanding of the technologies I work with.",
+    "I care about ownership, clarity, and building systems that are not just functional, but reliable and maintainable.",
+  ],
   email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
 };

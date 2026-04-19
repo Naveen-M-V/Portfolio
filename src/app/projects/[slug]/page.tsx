@@ -78,15 +78,20 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
         </section>
 
         <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">What I Did</h2>
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">Role & Contributions</h2>
           <ul className="space-y-3 text-sm text-[var(--muted)]">
-            {project.whatIDid.map((item) => (
+            {project.role.map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
+          {project.note ? (
+            <p className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-3 text-xs leading-6 text-[var(--muted)]">
+              Note: {project.note}
+            </p>
+          ) : null}
         </section>
       </div>
 

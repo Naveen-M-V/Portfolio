@@ -8,7 +8,7 @@ import { AnimatedSection } from "@/components/portfolio/animated-section";
 import { ContactForm } from "@/components/portfolio/contact-form";
 import { ProjectCard } from "@/components/portfolio/project-card";
 import { ThemeToggle } from "@/components/portfolio/theme-toggle";
-import { experience, navItems, personal, projects, skills } from "@/data/portfolio";
+import { additionalExperience, contact, experience, navItems, personal, projects, skills } from "@/data/portfolio";
 
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState<string>("hero");
@@ -32,8 +32,8 @@ export function PortfolioPage() {
   const skillGroups = useMemo(
     () => [
       { title: "Languages", values: skills.languages },
-      { title: "Web Technologies", values: skills.web },
-      { title: "Tools", values: skills.tools },
+      { title: "Working Knowledge", values: skills.workingKnowledge },
+      { title: "Tools & Concepts", values: skills.toolsAndConcepts },
     ],
     [],
   );
@@ -78,7 +78,8 @@ export function PortfolioPage() {
           <h1 className="max-w-4xl text-4xl leading-tight font-semibold tracking-tight sm:text-5xl md:text-6xl">
             {personal.name}
           </h1>
-          <p className="mt-4 max-w-4xl text-xl leading-relaxed text-[var(--muted)] sm:text-2xl">{personal.title}</p>
+          <p className="mt-4 max-w-4xl text-lg leading-relaxed text-[var(--foreground)] sm:text-xl">{personal.title}</p>
+          <p className="mt-2 max-w-4xl text-xl leading-relaxed text-[var(--muted)] sm:text-2xl">{personal.tagline}</p>
           <p className="mt-6 max-w-3xl text-base leading-7 text-[var(--muted)]">{personal.heroDescription}</p>
 
           <div className="mt-9 flex flex-wrap gap-3">
@@ -99,7 +100,11 @@ export function PortfolioPage() {
 
         <AnimatedSection id="about" className="scroll-mt-24 space-y-4">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">About</h2>
-          <p className="max-w-4xl text-[15px] leading-7 text-[var(--muted)] sm:text-base">{personal.about}</p>
+          <div className="max-w-4xl space-y-4 text-[15px] leading-7 text-[var(--muted)] sm:text-base">
+            {personal.about.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
         </AnimatedSection>
 
         <AnimatedSection id="projects" className="scroll-mt-24 space-y-7">
@@ -130,19 +135,43 @@ export function PortfolioPage() {
               </div>
             ))}
           </div>
+
+          <article className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+            <h3 className="mb-2 text-sm font-medium tracking-wide text-[var(--muted)] uppercase">Approach</h3>
+            <p className="text-sm leading-7 text-[var(--muted)]">{skills.approach}</p>
+          </article>
         </AnimatedSection>
 
         <AnimatedSection id="experience" className="scroll-mt-24 space-y-4">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Experience</h2>
           <article className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
             <h3 className="text-lg font-medium">{experience.role}</h3>
-            <p className="mt-3 max-w-4xl text-[15px] leading-7 text-[var(--muted)] sm:text-base">{experience.description}</p>
+            <ul className="mt-4 space-y-2 text-[15px] leading-7 text-[var(--muted)] sm:text-base">
+              {experience.points.map((point) => (
+                <li key={point} className="flex items-start gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </article>
+        </AnimatedSection>
+
+        <AnimatedSection id="additional" className="scroll-mt-24 space-y-7">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Additional Experience</h2>
+          <div className="grid gap-5 md:grid-cols-3">
+            {additionalExperience.map((item) => (
+              <article key={item.title} className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+                <h3 className="text-base font-medium">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
+              </article>
+            ))}
+          </div>
         </AnimatedSection>
 
         <AnimatedSection id="contact" className="scroll-mt-24 space-y-7">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Contact</h2>
-          <p className="text-[var(--muted)]">Let’s build something meaningful.</p>
+          <p className="text-[var(--muted)]">{contact.text}</p>
 
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="hover-depth space-y-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">

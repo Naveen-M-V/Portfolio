@@ -16,6 +16,26 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contact Form Email Backend Setup
+
+The contact form posts to `POST /api/contact` and sends email via SMTP.
+
+1. Copy `.env.example` to `.env.local`
+2. Fill SMTP values and sender/receiver emails
+3. Restart the dev server
+
+Example (Gmail):
+
+- `SMTP_HOST=smtp.gmail.com`
+- `SMTP_PORT=587`
+- `SMTP_SECURE=false`
+- `SMTP_USER=your-email@gmail.com`
+- `SMTP_PASS=your-app-password` (Google App Password, not normal password)
+- `CONTACT_FROM_EMAIL=your-email@gmail.com`
+- `CONTACT_TO_EMAIL=mvnaveen18@gmail.com`
+
+If SMTP is not configured, the API returns a clear error so you can fix environment settings quickly.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
