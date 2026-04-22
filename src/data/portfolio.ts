@@ -6,13 +6,19 @@ export type Project = {
   features: string[];
   tech: string[];
   role: string[];
-  note?: string;
+  impact: string[];
   challenges: string[];
+  insight: string;
+  demo?: {
+    images: string[];
+    video?: string;
+  };
 };
 
 export const navItems = [
   { id: "hero", label: "Home" },
   { id: "about", label: "About" },
+  { id: "work", label: "How I Work" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
@@ -25,35 +31,43 @@ export const projects: Project[] = [
     slug: "hrms-system",
     title: "Human Resource Management System (HRMS)",
     description:
-      "A full-scale HR platform for employee operations, approvals, and internal workflows with structured role-based dashboards.",
+      "A full-scale HR platform built to manage employees, approvals, and internal workflows through role-based access.",
     overview:
-      "A full-scale HR management platform designed to handle employee operations, approvals, and internal workflows with role-based access and structured dashboards.",
+      "A full-scale HR management platform for employee operations, approvals, and internal workflows with structured role-based access.",
     features: [
       "Employee profile and document management",
       "Leave and expense approval workflows",
       "3-level dashboards (Admin / Manager / Employee)",
       "Integrated E-learning module",
     ],
-    tech: ["Node.js", "Express", "MongoDB", "React", "Role-Based Access"],
+    tech: ["Node.js", "Express", "React", "Supabase", "Role-Based Access"],
     role: [
       "Built backend APIs and database models",
-      "Implemented role-based access",
-      "Refactored the system for scalability and real usage",
+      "Structured role-based workflows for admins, managers, and employees",
+      "Refactored the system to support changing requirements and real usage",
     ],
-    note: "Frontend demo with simulated data",
+    impact: [
+      "Reduced manual dependency in internal HR operations",
+      "Gave teams a structured flow for approvals and employee data",
+      "Made the backend easier to extend as requirements changed",
+    ],
     challenges: [
       "Managed increasing system complexity due to evolving requirements",
       "Refactored backend structure to handle scalability",
       "Learned the importance of clean architecture and future-proof design",
     ],
+    insight: "Designing for change matters more than designing for perfection.",
+    demo: {
+      images: [],
+    },
   },
   {
     slug: "flight-package-booking-platform",
     title: "Flight & Package Booking Platform",
     description:
-      "A travel booking system integrating real-world flight APIs with custom package logic and operations tooling.",
+      "A travel booking system built around flight APIs, custom package handling, and booking workflows.",
     overview:
-      "A travel booking system integrating real-world flight APIs and custom package management for users.",
+      "A travel booking system integrating real flight APIs and custom package management features.",
     features: [
       "Flight booking using Almosafer API",
       "Travel package management",
@@ -62,23 +76,32 @@ export const projects: Project[] = [
     ],
     tech: ["Next.js", "Node.js", "REST APIs", "Supabase", "Pricing Engine"],
     role: [
-      "API integration and data handling",
-      "Built backend booking workflows",
-      "Developed admin dashboard features",
+      "Integrated external APIs and handled booking data",
+      "Built backend booking workflows and pricing logic",
+      "Structured the admin dashboard for operational use",
+    ],
+    impact: [
+      "Created a clearer flow between flight data, packages, and customer requests",
+      "Made booking operations easier to track from the admin side",
+      "Supported a flexible system for pricing and coupon handling",
     ],
     challenges: [
       "Handled API inconsistencies and edge cases",
       "Designed flexible pricing and coupon logic",
       "Managed real-world booking workflows",
     ],
+    insight: "Understanding API flow is more important than simply calling endpoints.",
+    demo: {
+      images: [],
+    },
   },
   {
     slug: "event-hosting-ticket-booking-platform",
     title: "Event Hosting & Ticket Booking Platform",
     description:
-      "A multi-role event lifecycle platform with approval workflows and public ticket booking.",
+      "A multi-role event platform for hosting, approval, and booking workflows.",
     overview:
-      "A multi-role event platform enabling different types of users to host and manage events with admin approval workflows.",
+      "A multi-role platform for hosting and managing events with structured approval and booking flows.",
     features: [
       "Multi-user roles (Admin, Influencer, Artist, Provider)",
       "Event creation with pricing",
@@ -87,23 +110,32 @@ export const projects: Project[] = [
     ],
     tech: ["React", "Node.js", "Express", "Supabase", "System Architecture"],
     role: [
-      "Designed system architecture",
+      "Designed the system architecture for multiple user flows",
       "Built event lifecycle and booking logic",
-      "Managed role-based interactions",
+      "Managed role-based interactions and approvals",
+    ],
+    impact: [
+      "Gave each user type a clear path through the system",
+      "Reduced confusion around event creation and approval flow",
+      "Made the platform easier to reason about as roles expanded",
     ],
     challenges: [
       "Handled multiple user roles and interactions",
       "Designed scalable approval workflows",
       "Managed complex user journeys",
     ],
+    insight: "System complexity increases fast when user roles multiply.",
+    demo: {
+      images: [],
+    },
   },
   {
     slug: "nfc-tap-card-system",
     title: "NFC Tap Card System",
     description:
-      "An NFC-enabled digital identity platform for contact sharing through tap cards, QR codes, and dynamic links.",
+      "A digital NFC system for sharing contact information through tap cards, QR codes, and dynamic links.",
     overview:
-      "A digital NFC-based system enabling users to generate and share contact information through tap cards, QR codes, and dynamic links.",
+      "A digital NFC-based system for sharing contact information through tap cards, QR codes, and dynamic links.",
     features: [
       "NFC-enabled digital card generation",
       "QR and link sharing",
@@ -113,13 +145,22 @@ export const projects: Project[] = [
     role: [
       "Developed frontend and backend logic",
       "Implemented dynamic link and QR generation",
-      "Delivered a client-ready system",
+      "Delivered the system to a client-ready standard",
+    ],
+    impact: [
+      "Made contact sharing simpler across devices",
+      "Provided a clean flow for tap, QR, and link-based access",
+      "Delivered a usable product that could be handed to a client",
     ],
     challenges: [
       "Ensured smooth user experience across devices",
       "Handled real client requirements and expectations",
       "Delivered production-ready system quality",
     ],
+    insight: "Simple systems still need strong UX thinking to feel reliable.",
+    demo: {
+      images: [],
+    },
   },
 ];
 
@@ -129,26 +170,26 @@ export function getProjectBySlug(slug: string) {
 
 export const skills = {
   languages: ["C", "C++", "Java", "JavaScript"],
-  workingKnowledge: ["JavaScript", "React", "Node.js", "MongoDB"],
-  toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling", "Supabase"],
-  approach: "AI-assisted development, debugging, and rapid prototyping",
+  technologies: ["JavaScript", "React", "Node.js", "Supabase"],
+  toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling"],
 };
 
 export const experience = {
   role: "Full Stack Developer — Startup (2025 – Present)",
   points: [
-    "Built and delivered full-stack applications for real-world clients",
-    "Developed HR systems, booking platforms, CMS tools, and fintech-related products",
-    "Worked across frontend, backend, deployment, and client coordination",
-    "Improved system reliability through debugging and backend refactoring",
+    "Built full-stack applications under unclear and changing requirements",
+    "Structured backend flows for HR systems, booking platforms, CMS tools, and fintech-related products",
+    "Handled API integration, backend restructuring, and real-world debugging",
+    "Designed systems to stay stable while the product shape kept changing",
   ],
 };
 
 export const additionalExperience = [
   {
     title: "ImmersiveMed Solutions",
+    role: "Technical Lead",
     description:
-      "Building VR-based medical simulation systems using Unity to explore immersive healthcare training solutions.",
+      "Leading development of VR-based healthcare simulations using Unity, focusing on interactive training systems and medical visualization.",
   },
   {
     title: "IoT Minor Degree",
@@ -162,22 +203,27 @@ export const additionalExperience = [
 ];
 
 export const contact = {
-  text: "Let’s build something meaningful.",
+  text: "If you're building something and need someone who can take ownership and ship, let’s talk.",
 };
 
 export const personal = {
   name: "Naveen MV",
   title: "Full Stack Developer",
-  tagline:
-    "I build real-world systems and scalable applications using modern web technologies and AI-assisted development.",
+  tagline: "I build real-world systems under real constraints.",
   heroDescription:
-    "From HR platforms to booking systems and fintech integrations, I focus on building reliable products that work in real environments.",
+    "From HR platforms to booking systems and API integrations, I design and ship systems that work in evolving, real-world environments.",
   about: [
-    "I’m a Full Stack Developer with a background in Biomedical Engineering, focused on building production-grade systems for real-world use.",
-    "I’ve worked on multiple client-facing applications including HR management systems, booking platforms, CMS solutions, and NFC-based digital products. My experience involves handling both frontend and backend workflows, integrating APIs, and delivering complete systems from development to deployment.",
-    "I use AI-assisted workflows to improve development speed, explore solutions, and debug effectively, while continuously strengthening my core understanding of the technologies I work with.",
-    "I care about ownership, clarity, and building systems that are not just functional, but reliable and maintainable.",
+    "I build systems in environments where requirements change and clarity is not guaranteed.",
+    "My experience comes from working on real products—HR platforms, booking systems, and multi-role systems.",
+    "I work across frontend and backend, integrating APIs and structuring systems for real-world use.",
+    "Alongside web development, I’m building VR-based healthcare simulations using Unity.",
   ],
   email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
 };
+
+export const workStyle = [
+  "I build systems even when requirements are unclear",
+  "I adapt quickly and restructure when systems break",
+  "I focus on making systems work, not just writing code",
+];

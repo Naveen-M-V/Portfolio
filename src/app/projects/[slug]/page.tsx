@@ -87,13 +87,43 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
               </li>
             ))}
           </ul>
-          {project.note ? (
-            <p className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-3 text-xs leading-6 text-[var(--muted)]">
-              Note: {project.note}
-            </p>
-          ) : null}
         </section>
       </div>
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">Impact</h2>
+          <ul className="space-y-3 text-sm text-[var(--muted)]">
+            {project.impact.map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">Insight</h2>
+          <p className="text-sm leading-7 text-[var(--muted)]">{project.insight}</p>
+        </section>
+      </div>
+
+      {project.demo ? (
+        <section className="hover-depth mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">Proof Structure</h2>
+          {project.demo.images.length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2">
+              {project.demo.images.map((image) => (
+                <div key={image} className="aspect-video rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)]" />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm leading-7 text-[var(--muted)]">Demo assets ready to be added.</p>
+          )}
+          {project.demo.video ? <p className="mt-3 text-sm text-[var(--muted)]">Video: {project.demo.video}</p> : null}
+        </section>
+      ) : null}
 
       <section className="hover-depth mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
         <h2 className="mb-4 text-xl font-semibold tracking-tight">Challenges & Learnings</h2>

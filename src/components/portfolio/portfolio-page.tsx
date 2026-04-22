@@ -8,7 +8,7 @@ import { AnimatedSection } from "@/components/portfolio/animated-section";
 import { ContactForm } from "@/components/portfolio/contact-form";
 import { ProjectCard } from "@/components/portfolio/project-card";
 import { ThemeToggle } from "@/components/portfolio/theme-toggle";
-import { additionalExperience, contact, experience, navItems, personal, projects, skills } from "@/data/portfolio";
+import { additionalExperience, contact, experience, navItems, personal, projects, skills, workStyle } from "@/data/portfolio";
 
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState<string>("hero");
@@ -32,7 +32,7 @@ export function PortfolioPage() {
   const skillGroups = useMemo(
     () => [
       { title: "Languages", values: skills.languages },
-      { title: "Working Knowledge", values: skills.workingKnowledge },
+      { title: "Technologies", values: skills.technologies },
       { title: "Tools & Concepts", values: skills.toolsAndConcepts },
     ],
     [],
@@ -107,6 +107,17 @@ export function PortfolioPage() {
           </div>
         </AnimatedSection>
 
+        <AnimatedSection id="work" className="scroll-mt-24 space-y-4">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">How I Work</h2>
+          <div className="grid gap-4 md:grid-cols-3">
+            {workStyle.map((item) => (
+              <article key={item} className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+                <p className="text-sm leading-7 text-[var(--muted)]">{item}</p>
+              </article>
+            ))}
+          </div>
+        </AnimatedSection>
+
         <AnimatedSection id="projects" className="scroll-mt-24 space-y-7">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Featured Projects</h2>
           <div className="grid gap-5 md:grid-cols-2">
@@ -136,10 +147,6 @@ export function PortfolioPage() {
             ))}
           </div>
 
-          <article className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
-            <h3 className="mb-2 text-sm font-medium tracking-wide text-[var(--muted)] uppercase">Approach</h3>
-            <p className="text-sm leading-7 text-[var(--muted)]">{skills.approach}</p>
-          </article>
         </AnimatedSection>
 
         <AnimatedSection id="experience" className="scroll-mt-24 space-y-4">
@@ -163,6 +170,7 @@ export function PortfolioPage() {
             {additionalExperience.map((item) => (
               <article key={item.title} className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
                 <h3 className="text-base font-medium">{item.title}</h3>
+                {"role" in item ? <p className="mt-1 text-xs tracking-[0.12em] text-[var(--muted)] uppercase">{item.role}</p> : null}
                 <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
               </article>
             ))}
