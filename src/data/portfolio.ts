@@ -60,7 +60,7 @@ export const projects: Project[] = [
       "Customer enquiry dashboard",
       "Coupon and pricing logic",
     ],
-    tech: ["Next.js", "Node.js", "REST APIs", "MongoDB", "Pricing Engine"],
+    tech: ["Next.js", "Node.js", "REST APIs", "Supabase", "Pricing Engine"],
     role: [
       "API integration and data handling",
       "Built backend booking workflows",
@@ -85,7 +85,7 @@ export const projects: Project[] = [
       "Admin approval system",
       "Ticket booking system",
     ],
-    tech: ["React", "Node.js", "Express", "MongoDB", "System Architecture"],
+    tech: ["React", "Node.js", "Express", "Supabase", "System Architecture"],
     role: [
       "Designed system architecture",
       "Built event lifecycle and booking logic",
@@ -130,7 +130,7 @@ export function getProjectBySlug(slug: string) {
 export const skills = {
   languages: ["C", "C++", "Java", "JavaScript"],
   workingKnowledge: ["JavaScript", "React", "Node.js", "MongoDB"],
-  toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling"],
+  toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling", "Supabase"],
   approach: "AI-assisted development, debugging, and rapid prototyping",
 };
 
