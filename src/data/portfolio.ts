@@ -40,7 +40,7 @@ export const projects: Project[] = [
       "3-level dashboards (Admin / Manager / Employee)",
       "Integrated E-learning module",
     ],
-    tech: ["Node.js", "Express", "React", "Supabase", "Role-Based Access"],
+    tech: ["Node.js", "Express", "React", "MongoDB", "Role-Based Access"],
     role: [
       "Built backend APIs and database models",
       "Structured role-based workflows for admins, managers, and employees",
@@ -141,7 +141,7 @@ export const projects: Project[] = [
       "QR and link sharing",
       "Contact download functionality",
     ],
-    tech: ["Next.js", "Node.js", "QR", "Dynamic Links", "NFC"],
+    tech: ["Next.js", "Node.js", "MongoDB", "QR", "NFC"],
     role: [
       "Developed frontend and backend logic",
       "Implemented dynamic link and QR generation",
@@ -170,7 +170,7 @@ export function getProjectBySlug(slug: string) {
 
 export const skills = {
   languages: ["C", "C++", "Java", "JavaScript"],
-  technologies: ["JavaScript", "React", "Node.js", "Supabase"],
+  technologies: ["JavaScript", "React", "Node.js", "MongoDB", "Supabase"],
   toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling"],
 };
 
