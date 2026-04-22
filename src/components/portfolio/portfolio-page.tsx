@@ -172,7 +172,7 @@ export function PortfolioPage() {
         </AnimatedSection>
 
         <AnimatedSection id="additional" className="scroll-mt-24 space-y-7">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Additional Experience</h2>
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Professional Background</h2>
           <div className="grid gap-5 md:grid-cols-3">
             {additionalExperience.map((item) => (
               <article key={item.title} className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
