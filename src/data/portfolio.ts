@@ -15,6 +15,12 @@ export type Project = {
   };
 };
 
+export type AdditionalExperienceItem = {
+  title: string;
+  role?: string;
+  description: string;
+};
+
 export const navItems = [
   { id: "hero", label: "Home" },
   { id: "about", label: "About" },
@@ -174,31 +180,57 @@ export const skills = {
   toolsAndConcepts: ["Git", "API Integration", "System Design", "Database Modeling"],
 };
 
-export const experience = {
-  role: "Full Stack Developer — Startup (2025 – Present)",
-  points: [
-    "Built full-stack applications under unclear and changing requirements",
-    "Structured backend flows for HR systems, booking platforms, CMS tools, and fintech-related products",
-    "Handled API integration, backend restructuring, and real-world debugging",
-    "Designed systems to stay stable while the product shape kept changing",
-  ],
-};
-
-export const additionalExperience = [
+export const experience = [
   {
-    title: "ImmersiveMed Solutions",
+    role: "Full Stack Developer",
+    company: "Athryan Tech Solutions",
+    period: "Sep 2025 – Present",
+    points: [
+      "Built full-stack applications using React, Node.js, and MongoDB under evolving client requirements",
+      "Structured backend systems for HR platforms, booking systems, and CMS tools",
+      "Integrated third-party APIs and handled real-world data flows and edge cases",
+      "Refactored backend logic and improved system stability during continuous product changes",
+      "Designed systems to remain stable despite unclear and shifting requirements",
+    ],
+  },
+  {
     role: "Technical Lead",
-    description:
-      "Leading development of VR-based healthcare simulations using Unity, focusing on interactive training systems and medical visualization.",
+    company: "ImmersiveMed Solutions",
+    period: "2025 – Present",
+    points: [
+      "Leading development of VR-based healthcare simulations using Unity and C#",
+      "Designing interactive training environments and medical visualization systems",
+      "Defining system architecture and technical direction for immersive learning solutions",
+    ],
   },
   {
-    title: "IoT Minor Degree",
-    description: "Exposure to embedded systems, sensors, and hardware-software integration.",
+    role: "Live Project Intern",
+    company: "Vivnovation",
+    period: "Aug 2025 – Oct 2025",
+    points: [
+      "Developed Unity-based 3D training module for US healthcare workflow understanding",
+      "Worked on insurance claim documentation using EMR data",
+      "Created and submitted claim forms for physicians",
+      "Gained exposure to healthcare operations and real-world data workflows",
+    ],
+  },
+];
+
+export const additionalExperience: AdditionalExperienceItem[] = [
+  {
+    title: "Biomedical Engineering",
+    description:
+      "Academic foundation in biomedical systems, physiology-driven problem framing, and applied technical thinking.",
   },
   {
-    title: "Leadership & Involvement",
+    title: "Minor in IoT",
     description:
-      "Organized and coordinated events under YI Yuva, managing execution, logistics, and team collaboration.",
+      "Exposure to embedded systems, sensors, and hardware-software integration for real-world connected systems.",
+  },
+  {
+    title: "YI Yuva Event Coordinator",
+    description:
+      "Coordinated events end-to-end across planning, execution, logistics, and team collaboration.",
   },
 ];
 

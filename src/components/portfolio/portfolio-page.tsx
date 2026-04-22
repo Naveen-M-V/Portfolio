@@ -151,17 +151,24 @@ export function PortfolioPage() {
 
         <AnimatedSection id="experience" className="scroll-mt-24 space-y-4">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Experience</h2>
-          <article className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-            <h3 className="text-lg font-medium">{experience.role}</h3>
-            <ul className="mt-4 space-y-2 text-[15px] leading-7 text-[var(--muted)] sm:text-base">
-              {experience.points.map((point) => (
-                <li key={point} className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
+          <div className="space-y-5">
+            {experience.map((item) => (
+              <article key={`${item.role}-${item.company}`} className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-lg font-medium">{item.role} — {item.company}</h3>
+                  <p className="text-xs tracking-[0.08em] text-[var(--muted)] uppercase">{item.period}</p>
+                </div>
+                <ul className="mt-4 space-y-2 text-[15px] leading-7 text-[var(--muted)] sm:text-base">
+                  {item.points.map((point) => (
+                    <li key={point} className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </AnimatedSection>
 
         <AnimatedSection id="additional" className="scroll-mt-24 space-y-7">
@@ -170,7 +177,7 @@ export function PortfolioPage() {
             {additionalExperience.map((item) => (
               <article key={item.title} className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
                 <h3 className="text-base font-medium">{item.title}</h3>
-                {"role" in item ? <p className="mt-1 text-xs tracking-[0.12em] text-[var(--muted)] uppercase">{item.role}</p> : null}
+                {item.role ? <p className="mt-1 text-xs tracking-[0.12em] text-[var(--muted)] uppercase">{item.role}</p> : null}
                 <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
               </article>
             ))}
