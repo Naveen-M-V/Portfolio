@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/portfolio";
 import { notFound } from "next/navigation";
@@ -111,11 +112,18 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
 
       {project.demo ? (
         <section className="hover-depth mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Proof Structure</h2>
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">Demo</h2>
           {project.demo.images.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2">
-              {project.demo.images.map((image) => (
-                <div key={image} className="aspect-video rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)]" />
+              {project.demo.images.map((image, index) => (
+                <div key={image} className="relative aspect-video overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)]">
+                  <Image
+                    src={image}
+                    alt={`${project.title} demo ${index + 1}`}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
               ))}
             </div>
           ) : (

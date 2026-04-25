@@ -64,7 +64,7 @@ export const projects: Project[] = [
     ],
     insight: "Designing for change matters more than designing for perfection.",
     demo: {
-      images: [],
+      images: ["/demo/hrms/admin.jpeg", "/demo/hrms/employee.jpeg", "/demo/hrms/leaveapproval.jpeg", "/demo/hrms/manager.jpeg"],
     },
   },
   {
@@ -98,7 +98,7 @@ export const projects: Project[] = [
     ],
     insight: "Understanding API flow is more important than simply calling endpoints.",
     demo: {
-      images: [],
+      images: ["/demo/flight/admindash.jpeg", "/demo/flight/adminenquiry.jpeg", "/demo/flight/customerdash.jpeg", "/demo/flight/customerenquiry.jpeg", "/demo/flight/home.jpeg", "/demo/flight/home2packages.jpeg"],
     },
   },
   {
@@ -132,7 +132,7 @@ export const projects: Project[] = [
     ],
     insight: "System complexity increases fast when user roles multiply.",
     demo: {
-      images: [],
+      images: ["/demo/eventbooking/home.jpeg", "/demo/eventbooking/outlet.jpeg", "/demo/eventbooking/promoter.jpeg", "/demo/eventbooking/seller.jpeg"],
     },
   },
   {
@@ -165,7 +165,7 @@ export const projects: Project[] = [
     ],
     insight: "Simple systems still need strong UX thinking to feel reliable.",
     demo: {
-      images: [],
+      images: ["/demo/nfc/digitalcard.jpeg", "/demo/nfc/form.jpeg"],
     },
   },
 ];
