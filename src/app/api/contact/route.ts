@@ -33,26 +33,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  const targetEmail = process.env.CONTACT_TO_EMAIL ?? "mvnaveen18@gmail.com";
-  const originHeader = request.headers.get("origin") ?? request.headers.get("referer") ?? "https://naveenmv.dev";
+  const targetEmail = process.env.CONTACT_TO_EMAIL ?? "lunazaven1727@gmail.com";
+  const requestOrigin = request.headers.get("origin") ?? request.headers.get("referer") ?? "https://naveenmv.dev";
 
   try {
+    const formData = new URLSearchParams();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("message", message);
+    formData.append("_subject", `New Portfolio Message from ${name}`);
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
+
     const formSubmitResponse = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
-        Origin: originHeader,
-        Referer: originHeader,
+        UserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        Origin: requestOrigin,
+        Referer: requestOrigin,
       },
-      body: JSON.stringify({
-        name,
-        email,
-        message,
-        _subject: `New Portfolio Message from ${name}`,
-        _template: "table",
-        _captcha: "false",
-      }),
+      body: formData.toString(),
     });
 
     const rawText = await formSubmitResponse.text();
@@ -61,20 +63,27 @@ export async function POST(request: Request) {
     try {
       resData = JSON.parse(rawText);
     } catch {
-      throw new Error("Unable to parse FormSubmit response.");
-    }
-
-    if (resData.success === "false" || resData.success === false) {
-      // If FormSubmit requests one-time activation
-      if (resData.message && resData.message.toLowerCase().includes("activation")) {
+      // If FormSubmit returned HTML text instead of JSON
+      if (rawText.toLowerCase().includes("activation")) {
         return NextResponse.json(
           {
-            error: `FormSubmit activation link sent to ${targetEmail}. Please check your inbox or spam folder and click "Activate Form" once to enable instant delivery.`,
+            error: `Activation email sent to ${targetEmail}. Please check your inbox or spam folder and click "Activate Form" once to enable instant email delivery.`,
           },
           { status: 400 }
         );
       }
-      throw new Error(resData.message ?? "Failed to send message via FormSubmit.");
+    }
+
+    if (resData.success === "false" || resData.success === false) {
+      if (resData.message && resData.message.toLowerCase().includes("activation")) {
+        return NextResponse.json(
+          {
+            error: `Activation email sent to ${targetEmail}. Please check your inbox or spam folder and click "Activate Form" once to enable instant email delivery.`,
+          },
+          { status: 400 }
+        );
+      }
+      throw new Error(resData.message ?? "FormSubmit service error.");
     }
   } catch (error) {
     return NextResponse.json(
@@ -82,7 +91,7 @@ export async function POST(request: Request) {
         error:
           error instanceof Error
             ? error.message
-            : `Unable to send message. Please email ${targetEmail} directly.`,
+            : `Unable to send message right now. Please email ${targetEmail} directly.`,
       },
       { status: 500 }
     );

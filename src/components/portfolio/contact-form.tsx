@@ -29,23 +29,58 @@ export function ContactForm() {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      // Primary submit via Next.js API route
+      let response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
-      const textData = await response.text();
+      let textData = await response.text();
       let data: { error?: string; success?: boolean } = {};
 
       try {
         data = JSON.parse(textData);
       } catch {
-        throw new Error("Unable to parse server response. Please try emailing lunazaven1727@gmail.com directly.");
+        data = {};
       }
 
+      // If server route failed, attempt direct browser submit to FormSubmit
       if (!response.ok) {
-        throw new Error(data.error ?? "Submission failed");
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        const directRes = await fetch("https://formsubmit.co/ajax/lunazaven1727@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            message: form.message,
+            _subject: `New Portfolio Message from ${form.name}`,
+            _template: "table",
+            _captcha: "false",
+          }),
+        });
+
+        const directText = await directRes.text();
+        let directData: { success?: string | boolean; message?: string } = {};
+
+        try {
+          directData = JSON.parse(directText);
+        } catch {
+          if (directText.toLowerCase().includes("activation")) {
+            throw new Error("Activation email sent to lunazaven1727@gmail.com! Please check your inbox/spam and click 'Activate Form' once.");
+          }
+        }
+
+        if (directData.success === "false" || directData.success === false) {
+          throw new Error(directData.message ?? "Unable to send message.");
+        }
       }
 
       setStatus("success");
@@ -54,7 +89,7 @@ export function ContactForm() {
       if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
-        setErrorMessage("Something went wrong. Try again.");
+        setErrorMessage("Something went wrong. Please try emailing lunazaven1727@gmail.com directly.");
       }
       setStatus("error");
     }
@@ -99,7 +134,7 @@ export function ContactForm() {
         />
       </label>
 
-      <div className="pt-4 flex items-center justify-between gap-4">
+      <div className="pt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
           disabled={status === "loading"}
@@ -112,7 +147,7 @@ export function ContactForm() {
           <p className="text-sm text-emerald-400">Message sent successfully.</p>
         ) : null}
         {status === "error" ? (
-          <p className="text-sm text-red-400">{errorMessage || "Something went wrong. Try again."}</p>
+          <p className="text-xs leading-relaxed text-amber-400 sm:text-sm">{errorMessage}</p>
         ) : null}
       </div>
     </form>
