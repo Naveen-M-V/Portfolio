@@ -33,12 +33,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
+  const targetEmail = process.env.CONTACT_TO_EMAIL ?? "mvnaveen18@gmail.com";
+  const originHeader = request.headers.get("origin") ?? request.headers.get("referer") ?? "https://naveenmv.dev";
+
   try {
-    const formSubmitResponse = await fetch("https://formsubmit.co/ajax/lunazaven1727@gmail.com", {
+    const formSubmitResponse = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Origin: originHeader,
+        Referer: originHeader,
       },
       body: JSON.stringify({
         name,
@@ -56,13 +61,19 @@ export async function POST(request: Request) {
     try {
       resData = JSON.parse(rawText);
     } catch {
-      // If FormSubmit returned HTML (e.g. initial email activation page)
-      if (!formSubmitResponse.ok) {
-        throw new Error("Email service activation pending. Please check your inbox at lunazaven1727@gmail.com.");
-      }
+      throw new Error("Unable to parse FormSubmit response.");
     }
 
-    if (!formSubmitResponse.ok) {
+    if (resData.success === "false" || resData.success === false) {
+      // If FormSubmit requests one-time activation
+      if (resData.message && resData.message.toLowerCase().includes("activation")) {
+        return NextResponse.json(
+          {
+            error: `FormSubmit activation link sent to ${targetEmail}. Please check your inbox or spam folder and click "Activate Form" once to enable instant delivery.`,
+          },
+          { status: 400 }
+        );
+      }
       throw new Error(resData.message ?? "Failed to send message via FormSubmit.");
     }
   } catch (error) {
@@ -71,7 +82,7 @@ export async function POST(request: Request) {
         error:
           error instanceof Error
             ? error.message
-            : "Unable to send your message right now. Please email lunazaven1727@gmail.com directly.",
+            : `Unable to send message. Please email ${targetEmail} directly.`,
       },
       { status: 500 }
     );

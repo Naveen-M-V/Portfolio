@@ -62,7 +62,7 @@ export const personal = {
   title: "Full Stack Developer",
   tagline:
     "I build software end to end: architecture, databases, APIs, mobile apps, deployment, the whole chain. Right now I'm leading engineering on a fintech product running across Flutter, React, Node.js, and PostgreSQL.",
-  email: "lunazaven1727@gmail.com",
+  email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
   github: "https://github.com/Naveen-M-V",
   resumeUrl: "#contact", // Can be pointed to /Naveen_MV_Resume.pdf
@@ -309,7 +309,7 @@ export const beyondCode = {
 export const contact = {
   heading: "Let's build something useful.",
   subtext: "Open to conversations around full-stack engineering, product development, fintech, and healthcare technology.",
-  email: "lunazaven1727@gmail.com",
+  email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
   github: "https://github.com/Naveen-M-V",
 };
