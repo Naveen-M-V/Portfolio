@@ -14,9 +14,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Naveen MV | Full Stack Developer",
+  title: "Naveen MV | Full Stack Developer & Systems Engineer",
   description:
-    "Full Stack Developer portfolio showcasing scalable business systems, booking platforms, HRMS, and production-grade applications.",
+    "Portfolio of Naveen MV — Full Stack Developer & Systems Engineer building production fintech platforms, enterprise HR systems, and immersive biomedical XR simulations.",
+  keywords: [
+    "Naveen MV",
+    "Full Stack Developer",
+    "Systems Engineer",
+    "Fintech Lead Developer",
+    "Flutter Developer",
+    "React",
+    "Next.js",
+    "Node.js",
+    "PostgreSQL",
+    "Biomedical XR",
+    "Unity",
+  ],
+  authors: [{ name: "Naveen MV", url: "https://github.com/Naveen-M-V" }],
+  openGraph: {
+    title: "Naveen MV | Full Stack Developer & Systems Engineer",
+    description:
+      "Naveen MV builds software end-to-end: architecture, databases, APIs, mobile apps, deployment, and biomedical XR simulations.",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({

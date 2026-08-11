@@ -177,9 +177,9 @@ export const featuredProjects: Project[] = [
     role: "Full Stack Engineer",
     liveUrl: "https://cub.athryan.com",
     description:
-      "Built an NFC-based digital business card platform, deployed at genuine enterprise scale: 5,000 physical cards issued for City Union Bank. This project is less about the stack and more about the fact that it held up in the field, at volume, for a bank, which tends to be a less forgiving environment than a staging server. I built the web platform behind it, including admin tools, digital profiles, QR/NFC interactions, and the bulk card management needed to issue and track cards at that scale without it turning into a support queue.",
+      "Built an enterprise NFC card platform for City Union Bank. Engineered the web application, dynamic profile rendering, and bulk provisioning engine to handle real-world field interactions for bank operations without support queue overhead.",
     overview:
-      "Enterprise-grade digital contact and card issuing platform powering 5,000 physical NFC cards for City Union Bank with real-time profile management and bulk issuance tooling.",
+      "Enterprise digital contact platform built to sustain high-volume physical card interactions, administrative controls, and bulk profile management in strict financial environments.",
     features: [
       "5,000 physical cards issued and deployed at enterprise scale for City Union Bank",
       "Web platform with digital profile rendering and dynamic QR/NFC interactions",
