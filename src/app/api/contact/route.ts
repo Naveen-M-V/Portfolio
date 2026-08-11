@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const formSubmitResponse = await fetch("https://formsubmit.co/ajax/mvnaveen18@gmail.com", {
+    const formSubmitResponse = await fetch("https://formsubmit.co/ajax/lunazaven1727@gmail.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     } catch {
       // If FormSubmit returned HTML (e.g. initial email activation page)
       if (!formSubmitResponse.ok) {
-        throw new Error("Email service activation pending. Please check your inbox at mvnaveen18@gmail.com.");
+        throw new Error("Email service activation pending. Please check your inbox at lunazaven1727@gmail.com.");
       }
     }
 
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
         error:
           error instanceof Error
             ? error.message
-            : "Unable to send your message right now. Please email mvnaveen18@gmail.com directly.",
+            : "Unable to send your message right now. Please email lunazaven1727@gmail.com directly.",
       },
       { status: 500 }
     );

@@ -41,7 +41,7 @@ export function ContactForm() {
       try {
         data = JSON.parse(textData);
       } catch {
-        throw new Error("Unable to parse server response. Please try emailing mvnaveen18@gmail.com directly.");
+        throw new Error("Unable to parse server response. Please try emailing lunazaven1727@gmail.com directly.");
       }
 
       if (!response.ok) {
