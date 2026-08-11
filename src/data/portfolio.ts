@@ -7,6 +7,7 @@ export type Project = {
   overview: string;
   features: string[];
   tech: string[];
+  liveUrl?: string;
   roleDetails?: string[];
   impact?: string[];
   challenges?: string[];
@@ -63,7 +64,7 @@ export const personal = {
     "I build software end to end: architecture, databases, APIs, mobile apps, deployment, the whole chain. Right now I'm leading engineering on a fintech product running across Flutter, React, Node.js, and PostgreSQL.",
   email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
-  github: "https://github.com/mvnaveen18",
+  github: "https://github.com/Naveen-M-V",
   resumeUrl: "#contact", // Can be pointed to /Naveen_MV_Resume.pdf
   about: [
     "I'm a full stack developer who cares more about what ships than what's on the slide.",
@@ -136,15 +137,13 @@ export const featuredProjects: Project[] = [
       "Built real-time transaction flows and admin control systems",
       "Configured production servers with Nginx, PM2, and GitHub Actions CI/CD",
     ],
-    demo: {
-      images: ["/demo/flight/admindash.jpeg", "/demo/flight/customerdash.jpeg"],
-    },
   },
 
   {
     slug: "hrms-system",
     title: "HRMS: Production HR System",
     role: "Full Stack Developer",
+    liveUrl: "https://hrms.talentshield.co.uk",
     description:
       "Built and deployed an HR system that's genuinely in use: attendance, leave, overtime, performance reviews, approval chains, certificate generation.",
     overview:
@@ -163,7 +162,12 @@ export const featuredProjects: Project[] = [
       "Built responsive management dashboards and automated PDF generator",
     ],
     demo: {
-      images: ["/demo/hrms/admin.jpeg", "/demo/hrms/manager.jpeg", "/demo/hrms/employee.jpeg"],
+      images: [
+        "/demo/hrms/admin.jpeg",
+        "/demo/hrms/manager.jpeg",
+        "/demo/hrms/employee.jpeg",
+        "/demo/hrms/leaveapproval.jpeg",
+      ],
     },
   },
 
@@ -171,6 +175,7 @@ export const featuredProjects: Project[] = [
     slug: "nfc-digital-business-cards",
     title: "NFC Digital Business Cards: City Union Bank",
     role: "Full Stack Engineer",
+    liveUrl: "https://cub.athryan.com",
     description:
       "Built an NFC-based digital business card platform, deployed at genuine enterprise scale: 5,000 physical cards issued for City Union Bank. This project is less about the stack and more about the fact that it held up in the field, at volume, for a bank, which tends to be a less forgiving environment than a staging server. I built the web platform behind it, including admin tools, digital profiles, QR/NFC interactions, and the bulk card management needed to issue and track cards at that scale without it turning into a support queue.",
     overview:
@@ -212,9 +217,6 @@ export const featuredProjects: Project[] = [
       "Processed high-resolution medical DICOM/3D assets into real-time render models",
       "Integrated biomedical pathology models into interactive training modules",
     ],
-    demo: {
-      images: ["/demo/eventbooking/home.jpeg"],
-    },
   },
 ];
 
@@ -309,5 +311,5 @@ export const contact = {
   subtext: "Open to conversations around full-stack engineering, product development, fintech, and healthcare technology.",
   email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
-  github: "https://github.com/mvnaveen18",
+  github: "https://github.com/Naveen-M-V",
 };

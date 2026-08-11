@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import type { Project } from "@/data/portfolio";
 
@@ -24,15 +24,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="pointer-events-none absolute top-0 left-0 h-[2px] w-0 bg-[var(--accent)] transition-all duration-500 group-hover:w-full" />
 
       <div className="relative space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-start justify-between gap-2">
           <h3 className="text-xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
             {project.title}
           </h3>
-          {project.role ? (
-            <span className="rounded-full border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-xs font-medium text-[var(--accent)]">
-              {project.role}
-            </span>
-          ) : null}
+          <div className="flex items-center gap-2">
+            {project.liveUrl ? (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Visit live site for ${project.title}`}
+                className="relative z-20 inline-flex items-center gap-1 rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-2.5 py-0.5 text-xs font-semibold text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all"
+              >
+                Live Site
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            ) : null}
+            {project.role ? (
+              <span className="rounded-full border border-[var(--border)] bg-[var(--surface-elevated)] px-2.5 py-0.5 text-xs font-medium text-[var(--muted)]">
+                {project.role}
+              </span>
+            ) : null}
+          </div>
         </div>
 
         <p className="text-sm leading-relaxed text-[var(--muted)]">{project.description}</p>

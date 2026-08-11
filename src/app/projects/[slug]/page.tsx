@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, ExternalLink } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/portfolio";
 import { notFound } from "next/navigation";
 
@@ -46,7 +46,19 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
           Back to Projects
         </Link>
 
-        <span className="text-xs font-mono tracking-widest text-[var(--accent)] uppercase">Case Study</span>
+        {project.liveUrl ? (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="ripple-button hover-depth inline-flex items-center gap-2 rounded-full border border-[var(--accent)] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all hover:bg-opacity-90"
+          >
+            Visit Live Platform
+            <ExternalLink className="h-4 w-4" />
+          </a>
+        ) : (
+          <span className="text-xs font-mono tracking-widest text-[var(--accent)] uppercase">Case Study</span>
+        )}
       </div>
 
       <section className="space-y-5">

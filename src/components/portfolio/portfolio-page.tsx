@@ -158,7 +158,7 @@ export function PortfolioPage() {
           <div className="pointer-events-none absolute -top-12 right-0 h-64 w-64 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--accent)_22%,transparent)_0%,transparent_70%)]" />
 
           <p className="anime-hero-item text-xs font-semibold tracking-widest text-[var(--accent)] uppercase">
-            Full Stack Developer • Systems Engineer
+            Full Stack Developer • Product Engineer
           </p>
 
           <h1 className="anime-hero-item text-4xl leading-tight font-bold tracking-tight sm:text-6xl md:text-7xl text-[var(--foreground)]">
