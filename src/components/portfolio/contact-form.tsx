@@ -29,58 +29,40 @@ export function ContactForm() {
     setErrorMessage("");
 
     try {
-      // Primary submit via Next.js API route
-      let response = await fetch("/api/contact", {
+      // Direct browser fetch to FormSubmit (bypasses serverless Cloudflare challenges)
+      const response = await fetch("https://formsubmit.co/ajax/lunazaven1727@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: `New Portfolio Message from ${form.name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
       });
 
-      let textData = await response.text();
-      let data: { error?: string; success?: boolean } = {};
+      const rawText = await response.text();
+      let resData: { success?: string | boolean; message?: string } = {};
 
       try {
-        data = JSON.parse(textData);
+        resData = JSON.parse(rawText);
       } catch {
-        data = {};
+        if (rawText.toLowerCase().includes("activation")) {
+          throw new Error("Activation email sent to lunazaven1727@gmail.com! Please check your inbox (or spam) and click 'Activate Form' once.");
+        }
+        throw new Error("FormSubmit service temporary error. Please try emailing lunazaven1727@gmail.com directly.");
       }
 
-      // If server route failed, attempt direct browser submit to FormSubmit
-      if (!response.ok) {
-        if (data.error) {
-          throw new Error(data.error);
+      if (resData.success === "false" || resData.success === false) {
+        if (resData.message && resData.message.toLowerCase().includes("activation")) {
+          throw new Error("FormSubmit activation email sent to lunazaven1727@gmail.com! Please check your inbox (or spam) and click 'Activate Form' once.");
         }
-
-        const directRes = await fetch("https://formsubmit.co/ajax/lunazaven1727@gmail.com", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            message: form.message,
-            _subject: `New Portfolio Message from ${form.name}`,
-            _template: "table",
-            _captcha: "false",
-          }),
-        });
-
-        const directText = await directRes.text();
-        let directData: { success?: string | boolean; message?: string } = {};
-
-        try {
-          directData = JSON.parse(directText);
-        } catch {
-          if (directText.toLowerCase().includes("activation")) {
-            throw new Error("Activation email sent to lunazaven1727@gmail.com! Please check your inbox/spam and click 'Activate Form' once.");
-          }
-        }
-
-        if (directData.success === "false" || directData.success === false) {
-          throw new Error(directData.message ?? "Unable to send message.");
-        }
+        throw new Error(resData.message ?? "Failed to send message.");
       }
 
       setStatus("success");
@@ -89,7 +71,7 @@ export function ContactForm() {
       if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
-        setErrorMessage("Something went wrong. Please try emailing lunazaven1727@gmail.com directly.");
+        setErrorMessage("Unable to send message right now. Please email lunazaven1727@gmail.com directly.");
       }
       setStatus("error");
     }
@@ -144,7 +126,7 @@ export function ContactForm() {
         </button>
 
         {status === "success" ? (
-          <p className="text-sm text-emerald-400">Message sent successfully.</p>
+          <p className="text-sm font-medium text-emerald-400">Message sent successfully.</p>
         ) : null}
         {status === "error" ? (
           <p className="text-xs leading-relaxed text-amber-400 sm:text-sm">{errorMessage}</p>

@@ -34,27 +34,22 @@ export async function POST(request: Request) {
   }
 
   const targetEmail = process.env.CONTACT_TO_EMAIL ?? "lunazaven1727@gmail.com";
-  const requestOrigin = request.headers.get("origin") ?? request.headers.get("referer") ?? "https://naveenmv.dev";
 
   try {
-    const formData = new URLSearchParams();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("message", message);
-    formData.append("_subject", `New Portfolio Message from ${name}`);
-    formData.append("_template", "table");
-    formData.append("_captcha", "false");
-
     const formSubmitResponse = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         Accept: "application/json",
-        UserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        Origin: requestOrigin,
-        Referer: requestOrigin,
       },
-      body: formData.toString(),
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        _subject: `New Portfolio Message from ${name}`,
+        _template: "table",
+        _captcha: "false",
+      }),
     });
 
     const rawText = await formSubmitResponse.text();
@@ -63,11 +58,10 @@ export async function POST(request: Request) {
     try {
       resData = JSON.parse(rawText);
     } catch {
-      // If FormSubmit returned HTML text instead of JSON
       if (rawText.toLowerCase().includes("activation")) {
         return NextResponse.json(
           {
-            error: `Activation email sent to ${targetEmail}. Please check your inbox or spam folder and click "Activate Form" once to enable instant email delivery.`,
+            error: `Activation email sent to ${targetEmail}. Please check your inbox/spam folder and click "Activate Form" once.`,
           },
           { status: 400 }
         );
@@ -78,7 +72,7 @@ export async function POST(request: Request) {
       if (resData.message && resData.message.toLowerCase().includes("activation")) {
         return NextResponse.json(
           {
-            error: `Activation email sent to ${targetEmail}. Please check your inbox or spam folder and click "Activate Form" once to enable instant email delivery.`,
+            error: `Activation email sent to ${targetEmail}. Please check your inbox/spam folder and click "Activate Form" once.`,
           },
           { status: 400 }
         );
