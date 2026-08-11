@@ -65,7 +65,7 @@ export const personal = {
   email: "mvnaveen18@gmail.com",
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
   github: "https://github.com/Naveen-M-V",
-  resumeUrl: "#contact", // Can be pointed to /Naveen_MV_Resume.pdf
+  resumeUrl: "/resume/Naveen_MV_Resume.docx",
   about: [
     "I'm a full stack developer who cares more about what ships than what's on the slide.",
     "My work spans fintech, healthcare, HR, travel, events, and enterprise systems. Across most of these, I've been the one turning a vague requirement into a working system: architecture, frontend, backend, database, deployment, and everything in between.",

@@ -186,6 +186,9 @@ export function PortfolioPage() {
             <a
               ref={resumeBtnRef}
               href={personal.resumeUrl}
+              download
+              target="_blank"
+              rel="noreferrer"
               className="ripple-button inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-elevated)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
             >
               <Download className="h-4 w-4" />
