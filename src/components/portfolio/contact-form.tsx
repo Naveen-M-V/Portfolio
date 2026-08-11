@@ -29,7 +29,7 @@ export function ContactForm() {
     setErrorMessage("");
 
     try {
-      // Direct browser fetch to FormSubmit (bypasses serverless Cloudflare challenges)
+      // Direct browser fetch to FormSubmit
       const response = await fetch("https://formsubmit.co/ajax/lunazaven1727@gmail.com", {
         method: "POST",
         headers: {
@@ -37,12 +37,11 @@ export function ContactForm() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
           _subject: `New Portfolio Message from ${form.name}`,
+          Name: form.name,
+          Email: form.email,
+          Message: form.message,
           _template: "table",
-          _captcha: "false",
         }),
       });
 
@@ -53,15 +52,21 @@ export function ContactForm() {
         resData = JSON.parse(rawText);
       } catch {
         if (rawText.toLowerCase().includes("activation")) {
-          throw new Error("Activation email sent to lunazaven1727@gmail.com! Please check your inbox (or spam) and click 'Activate Form' once.");
+          setErrorMessage("First-time setup: An activation email was sent to lunazaven1727@gmail.com. Please check your inbox (or spam) and click 'Activate Form' once!");
+          setStatus("success");
+          setForm(defaultState);
+          return;
         }
-        throw new Error("FormSubmit service temporary error. Please try emailing lunazaven1727@gmail.com directly.");
+      }
+
+      if (resData.message && resData.message.toLowerCase().includes("activation")) {
+        setErrorMessage("First-time setup: An activation email was sent to lunazaven1727@gmail.com. Please check your inbox (or spam) and click 'Activate Form' once!");
+        setStatus("success");
+        setForm(defaultState);
+        return;
       }
 
       if (resData.success === "false" || resData.success === false) {
-        if (resData.message && resData.message.toLowerCase().includes("activation")) {
-          throw new Error("FormSubmit activation email sent to lunazaven1727@gmail.com! Please check your inbox (or spam) and click 'Activate Form' once.");
-        }
         throw new Error(resData.message ?? "Failed to send message.");
       }
 
