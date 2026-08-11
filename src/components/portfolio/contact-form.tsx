@@ -89,11 +89,11 @@ export function ContactForm() {
         />
       </label>
 
-      <div className="flex items-center justify-between gap-4">
+      <div className="pt-4 flex items-center justify-between gap-4">
         <button
           type="submit"
           disabled={status === "loading"}
-          className="ripple-button hover-depth inline-flex items-center justify-center rounded-full border border-transparent bg-[var(--foreground)] px-5 py-2 text-sm font-medium text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-70"
+          className="ripple-button hover-depth inline-flex items-center justify-center rounded-full border border-transparent bg-[var(--foreground)] px-6 py-2.5 text-sm font-semibold text-[var(--background)] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "loading" ? "Sending..." : "Send Message"}
         </button>

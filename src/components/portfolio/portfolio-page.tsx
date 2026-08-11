@@ -421,7 +421,7 @@ export function PortfolioPage() {
                   </span>
                   <div>
                     <p className="text-xs text-[var(--muted)]">Professional Network</p>
-                    <p className="font-semibold text-[var(--foreground)]">LinkedIn Profile</p>
+                    <p className="font-semibold text-[var(--foreground)]">LinkedIn</p>
                   </div>
                 </Link>
 
@@ -436,13 +436,9 @@ export function PortfolioPage() {
                   </span>
                   <div>
                     <p className="text-xs text-[var(--muted)]">Source Code & Projects</p>
-                    <p className="font-semibold text-[var(--foreground)]">GitHub Profile</p>
+                    <p className="font-semibold text-[var(--foreground)]">GitHub</p>
                   </div>
                 </Link>
-              </div>
-
-              <div className="pt-4 border-t border-[var(--border)]/60 text-xs text-[var(--muted)]">
-                Built with Next.js, TypeScript, Tailwind CSS & anime.js
               </div>
             </div>
 
