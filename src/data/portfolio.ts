@@ -264,7 +264,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Full Stack Developer",
     company: "Athryan Tech Solutions",
-    period: "2025 – Present",
+    period: "Sep 2025 – Jul 2026",
     points: [
       "Delivered 8+ production projects across fintech, HR, travel, events, campaigns, and enterprise systems.",
       "Frontend, backend, database design, third-party integrations, deployment, and enough time in production debugging to know what actually breaks in the real world versus what breaks in a demo.",
@@ -272,12 +272,12 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    role: "CTO / Technical Lead",
+    role: "Technical Lead",
     company: "ImmersiveMed Solutions",
-    period: "2025 – Present",
+    period: "2025 – 2026",
     points: [
-      "Leading technical development of immersive healthcare products, combining XR, 3D modeling, and biomedical engineering with software development.",
-      "Architecting spatial computing medical simulations and virtual anatomy platforms.",
+      "Led technical development of immersive healthcare products, combining XR, 3D modeling, and biomedical engineering with software development.",
+      "Architected spatial computing medical simulations and virtual anatomy platforms.",
     ],
   },
 ];
