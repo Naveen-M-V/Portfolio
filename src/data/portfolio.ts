@@ -1,18 +1,40 @@
 export type Project = {
   slug: string;
   title: string;
+  subtitle?: string;
+  role?: string;
   description: string;
   overview: string;
   features: string[];
   tech: string[];
-  role: string[];
-  impact: string[];
-  challenges: string[];
-  insight: string;
+  roleDetails?: string[];
+  impact?: string[];
+  challenges?: string[];
+  insight?: string;
   demo?: {
     images: string[];
     video?: string;
   };
+};
+
+export type SecondaryProject = {
+  slug: string;
+  title: string;
+  description: string;
+  tech?: string[];
+};
+
+export type ExperienceItem = {
+  role: string;
+  company: string;
+  period: string;
+  points: string[];
+};
+
+export type WhatIDoItem = {
+  title: string;
+  skills: string[];
+  description?: string;
 };
 
 export type AdditionalExperienceItem = {
@@ -24,368 +46,268 @@ export type AdditionalExperienceItem = {
 export const navItems = [
   { id: "hero", label: "Home" },
   { id: "about", label: "About" },
-  { id: "work", label: "How I Work" },
-  { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" },
+  { id: "what-i-do", label: "What I Do" },
+  { id: "featured-work", label: "Featured Work" },
+  { id: "more-work", label: "More Work" },
   { id: "experience", label: "Experience" },
-  { id: "additional", label: "Beyond Code" },
+  { id: "arsenal", label: "Arsenal" },
+  { id: "education", label: "Education" },
+  { id: "beyond-code", label: "Beyond Code" },
   { id: "contact", label: "Contact" },
 ] as const;
 
-export const projects: Project[] = [
+export const personal = {
+  name: "Naveen MV",
+  title: "Full Stack Developer",
+  tagline:
+    "I build software end to end: architecture, databases, APIs, mobile apps, deployment, the whole chain. Right now I'm leading engineering on a fintech product running across Flutter, React, Node.js, and PostgreSQL.",
+  email: "mvnaveen18@gmail.com",
+  linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
+  github: "https://github.com/mvnaveen18",
+  resumeUrl: "#contact", // Can be pointed to /Naveen_MV_Resume.pdf
+  about: [
+    "I'm a full stack developer who cares more about what ships than what's on the slide.",
+    "My work spans fintech, healthcare, HR, travel, events, and enterprise systems. Across most of these, I've been the one turning a vague requirement into a working system: architecture, frontend, backend, database, deployment, and everything in between.",
+    "Right now that means Upsow, a B2B credit platform with buyer and seller apps, an admin system, real-time transaction flows, and the infrastructure that keeps it all running. Before software, I trained as a biomedical engineer, which is also why there's a VR anatomy project further down this page. It's not a detour. It's where I started.",
+  ],
+  aiPhilosophy:
+    "I use AI to move faster on implementation, debugging, and research. Architecture, validation, and the decisions that actually matter stay with me.",
+};
+
+export const whatIDo: WhatIDoItem[] = [
+  {
+    title: "Full Stack Development",
+    skills: ["React", "Next.js", "Node.js", "Express", "PostgreSQL", "MongoDB", "Supabase"],
+    description: "Building responsive interfaces and scalable backend systems designed for real-world reliability.",
+  },
+  {
+    title: "Mobile Development",
+    skills: ["Flutter", "Android", "iOS", "REST APIs", "WebSockets"],
+    description: "Crafting cross-platform mobile applications with real-time data sync and smooth native UX.",
+  },
+  {
+    title: "Backend & System Design",
+    skills: ["API Architecture", "Authentication", "RBAC", "Database Design", "Rate Limiting", "Real-Time Systems"],
+    description: "Designing structured relational databases, secure multi-role permission flows, and robust APIs.",
+  },
+  {
+    title: "Deployment & DevOps",
+    skills: ["Ubuntu", "PM2", "Nginx", "GitHub Actions", "CI/CD", "Docker", "Git"],
+    description: "Configuring web servers, automated deployment pipelines, process managers, and containerization.",
+  },
+  {
+    title: "Working with AI Tools",
+    skills: ["Implementation Acceleration", "Debugging", "Research", "Architecture Retention", "Validation Ownership"],
+    description: "I use AI to move faster on implementation, debugging, and research. Architecture, validation, and the decisions that actually matter stay with me.",
+  },
+];
+
+export const featuredProjects: Project[] = [
+  {
+    slug: "upsow-b2b-credit-platform",
+    title: "Upsow: B2B Credit Platform",
+    role: "Lead Developer",
+    description:
+      "I lead engineering on a credit platform connecting buyers, sellers, admins, and financial partners. When the product involves real money, a schema mistake stops being an abstraction fairly quickly, which has a way of sharpening your attention to detail.",
+    overview:
+      "I own the mobile apps, backend services, database architecture, admin tooling, and the deployment pipeline. That covers buyer and seller onboarding, OTP-based flows, JWT authorization, credit and repayment logic, a relational data model built to actually hold up under real joins, migrations, indexing, real-time WebSocket messaging, and the less glamorous essentials: pagination, error handling, validation, rate limiting.",
+    features: [
+      "Buyer and seller onboarding with OTP-based flows & JWT authorization",
+      "Credit limits, repayment logic, and real-time transaction processing",
+      "Relational PostgreSQL data model built for high-performance joins and migrations",
+      "Real-time WebSocket messaging and automated admin operations",
+      "Production CI/CD, rate limiting, and robust error handling pipelines",
+    ],
+    tech: [
+      "Flutter",
+      "React",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "WebSockets",
+      "Redis",
+      "PM2",
+      "Nginx",
+      "GitHub Actions",
+    ],
+    roleDetails: [
+      "Architected backend microservices and PostgreSQL database schemas",
+      "Developed Flutter mobile apps for buyers and sellers",
+      "Built real-time transaction flows and admin control systems",
+      "Configured production servers with Nginx, PM2, and GitHub Actions CI/CD",
+    ],
+    demo: {
+      images: ["/demo/flight/admindash.jpeg", "/demo/flight/customerdash.jpeg"],
+    },
+  },
+
   {
     slug: "hrms-system",
-    title: "Human Resource Management System (HRMS)",
+    title: "HRMS: Production HR System",
+    role: "Full Stack Developer",
     description:
-      "A scalable HR platform designed to manage employees, approvals, internal workflows, and organizational operations through structured role-based systems.",
-
+      "Built and deployed an HR system that's genuinely in use: attendance, leave, overtime, performance reviews, approval chains, certificate generation.",
     overview:
-      "Built a full-scale HR management platform focused on reducing operational friction across employee management, approvals, leave workflows, and internal processes. The system was designed to evolve alongside changing organizational requirements.",
-
+      "I designed the role-based access model and manager approval flows, automated the scheduled jobs no one wants to run by hand, built responsive interfaces, and handled deployment and upkeep myself.",
     features: [
-      "Role-based dashboards for Admins, Managers, and Employees",
-      "Employee profile and document management",
-      "Leave, expense, and approval workflows",
-      "Integrated E-learning and internal resource modules",
-      "Workflow-driven operational structure",
+      "Role-based access model & multi-tier manager approval flows",
+      "Automated background jobs and cron-scheduled operational flows",
+      "Attendance, leave tracking, overtime, and performance reviews",
+      "Automated certificate generation and document processing",
+      "Full deployment, web server configuration, and self-hosted upkeep",
     ],
-
-    tech: [
-      "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "REST APIs",
-      "Role-Based Access Control",
+    tech: ["React", "Node.js", "Express", "MongoDB", "PM2", "Nginx"],
+    roleDetails: [
+      "Designed role-based access control (RBAC) and permission matrices",
+      "Automated backend scheduled jobs for attendance and leave cycles",
+      "Built responsive management dashboards and automated PDF generator",
     ],
-
-    role: [
-      "Architected backend workflows and database structures",
-      "Built scalable APIs and approval systems",
-      "Refactored system structure as requirements evolved",
-      "Handled role-based permissions and operational logic",
-      "Worked across frontend and backend integration",
-    ],
-
-    impact: [
-      "Reduced dependency on manual HR coordination",
-      "Created structured approval flows across multiple roles",
-      "Improved maintainability as the system expanded",
-      "Built a flexible foundation for future organizational features",
-    ],
-
-    challenges: [
-      "Managing constantly evolving requirements",
-      "Maintaining scalability while features expanded rapidly",
-      "Structuring clean backend architecture under real-world constraints",
-    ],
-
-    insight:
-      "Real systems are rarely built in perfect conditions. Adaptability matters more than perfection.",
-
     demo: {
-      images: [
-        "/demo/hrms/admin.jpeg",
-        "/demo/hrms/employee.jpeg",
-        "/demo/hrms/leaveapproval.jpeg",
-        "/demo/hrms/manager.jpeg",
-      ],
+      images: ["/demo/hrms/admin.jpeg", "/demo/hrms/manager.jpeg", "/demo/hrms/employee.jpeg"],
     },
   },
 
   {
-    slug: "flight-package-booking-platform",
-    title: "Flight & Package Booking Platform",
-
+    slug: "nfc-digital-business-cards",
+    title: "NFC Digital Business Cards: City Union Bank",
+    role: "Full Stack Engineer",
     description:
-      "A travel booking platform integrating flight APIs, package management, pricing workflows, and operational dashboards.",
-
+      "Built an NFC-based digital business card platform, deployed at genuine enterprise scale: 5,000 physical cards issued for City Union Bank. This project is less about the stack and more about the fact that it held up in the field, at volume, for a bank, which tends to be a less forgiving environment than a staging server. I built the web platform behind it, including admin tools, digital profiles, QR/NFC interactions, and the bulk card management needed to issue and track cards at that scale without it turning into a support queue.",
     overview:
-      "Built a booking platform that combined real-time flight integrations, travel package management, enquiry handling, and dynamic pricing workflows into a single operational system.",
-
+      "Enterprise-grade digital contact and card issuing platform powering 5,000 physical NFC cards for City Union Bank with real-time profile management and bulk issuance tooling.",
     features: [
-      "Flight booking through Almosafer API integration",
-      "Travel package management system",
-      "Customer enquiry and operational dashboard",
-      "Coupon handling and pricing logic",
-      "Admin workflow management",
+      "5,000 physical cards issued and deployed at enterprise scale for City Union Bank",
+      "Web platform with digital profile rendering and dynamic QR/NFC interactions",
+      "Bulk card management and tracking tools built for minimal support overhead",
+      "High-reliability backend surviving field volume and strict banking environments",
     ],
-
-    tech: [
-      "Next.js",
-      "Node.js",
-      "Supabase",
-      "REST APIs",
-      "Pricing Engine",
+    tech: ["Next.js", "Node.js", "MongoDB", "NFC", "QR Engine", "Bulk Issuance"],
+    roleDetails: [
+      "Engineered web application for physical card provisioning and dynamic profiles",
+      "Handled high-concurrency bank interactions without failure",
+      "Structured bulk CSV card creation and asset management workflows",
     ],
-
-    role: [
-      "Integrated external flight APIs and handled booking data flow",
-      "Designed backend booking and pricing workflows",
-      "Structured admin operations dashboard",
-      "Handled API edge cases and operational inconsistencies",
-      "Worked on frontend-backend integration",
-    ],
-
-    impact: [
-      "Simplified operational handling of travel bookings and packages",
-      "Created a structured flow between customer enquiries and booking operations",
-      "Made pricing and coupon systems easier to manage and extend",
-    ],
-
-    challenges: [
-      "Handling inconsistent API responses and external dependencies",
-      "Designing flexible pricing logic for multiple booking scenarios",
-      "Managing real-world operational workflows and edge cases",
-    ],
-
-    insight:
-      "Integrating APIs is easy. Designing systems that survive unreliable APIs is the real challenge.",
-
     demo: {
-      images: [
-        "/demo/flight/admindash.jpeg",
-        "/demo/flight/adminenquiry.jpeg",
-        "/demo/flight/customerdash.jpeg",
-        "/demo/flight/customerenquiry.jpeg",
-        "/demo/flight/home.jpeg",
-        "/demo/flight/home2packages.jpeg",
-      ],
+      images: ["/demo/nfc/digitalcard.jpeg", "/demo/nfc/form.jpeg"],
     },
   },
 
   {
-    slug: "event-hosting-ticket-booking-platform",
-    title: "Event Hosting & Ticket Booking Platform",
-
+    slug: "virtual-cadaver",
+    title: "Virtual Cadaver: Immersive Anatomy Platform",
+    role: "Sole Developer & XR Lead",
     description:
-      "A multi-role event platform designed for event hosting, approvals, operational workflows, and ticket management.",
-
+      "Built solo, this VR anatomy platform for medical education is where my biomedical background and my software work actually meet.",
     overview:
-      "Designed and developed a role-driven event management platform where influencers, artists, providers, and admins could interact through structured approval and booking systems.",
-
+      "Covers nine anatomical systems with highlighting, labeling, isolation, manipulation, and pathological models. Reached TRL-4. If you want proof I can build outside a browser, this is it.",
     features: [
-      "Multi-role user architecture",
-      "Event creation and pricing system",
-      "Admin approval workflows",
-      "Ticket booking and management",
-      "Operational dashboard flows",
+      "Covers nine complete anatomical systems with high-fidelity 3D medical models",
+      "Real-time structure highlighting, labeling, isolation, and spatial manipulation",
+      "Interactive pathological modeling for clinical simulation",
+      "Reached Technology Readiness Level 4 (TRL-4) for medical education",
     ],
-
-    tech: [
-      "React",
-      "Node.js",
-      "Express",
-      "Supabase",
-      "Role-Based Architecture",
+    tech: ["Unity", "C#", "XR", "Blender", "3D Medical Models"],
+    roleDetails: [
+      "Sole developer building 3D spatial UI and anatomical interaction engines in Unity",
+      "Processed high-resolution medical DICOM/3D assets into real-time render models",
+      "Integrated biomedical pathology models into interactive training modules",
     ],
-
-    role: [
-      "Designed the platform architecture for multiple user journeys",
-      "Built event lifecycle and approval workflows",
-      "Handled role-based interactions and permissions",
-      "Structured scalable operational flows",
-    ],
-
-    impact: [
-      "Created a clear operational structure between different user types",
-      "Reduced friction in event approvals and booking workflows",
-      "Built a scalable system capable of supporting expanding roles",
-    ],
-
-    challenges: [
-      "Managing complexity caused by multiple user roles",
-      "Designing scalable approval systems",
-      "Maintaining clarity across complex user journeys",
-    ],
-
-    insight:
-      "As user roles multiply, system complexity grows exponentially.",
-
     demo: {
-      images: [
-        "/demo/eventbooking/home.jpeg",
-        "/demo/eventbooking/outlet.jpeg",
-        "/demo/eventbooking/promoter.jpeg",
-        "/demo/eventbooking/seller.jpeg",
-      ],
-    },
-  },
-
-  {
-    slug: "nfc-tap-card-system",
-    title: "NFC Tap Card System",
-
-    description:
-      "A digital NFC-based contact sharing system using tap cards, QR codes, and dynamic links.",
-
-    overview:
-      "Developed a lightweight digital identity system allowing users to instantly share contact details through NFC taps, QR codes, and dynamically generated links.",
-
-    features: [
-      "NFC-enabled digital contact cards",
-      "QR code and dynamic link generation",
-      "Cross-device contact sharing",
-      "Downloadable contact functionality",
-    ],
-
-    tech: ["Next.js", "Node.js", "MongoDB", "NFC", "QR"],
-
-    role: [
-      "Developed frontend and backend system logic",
-      "Implemented QR and dynamic link generation",
-      "Built responsive user interaction flows",
-      "Delivered production-ready functionality for client usage",
-    ],
-
-    impact: [
-      "Simplified contact sharing across devices and platforms",
-      "Created a smooth user experience around NFC and QR interactions",
-      "Delivered a clean, client-ready digital product",
-    ],
-
-    challenges: [
-      "Maintaining smooth UX across devices",
-      "Handling real-world client expectations and revisions",
-      "Ensuring reliability in a simple but interaction-heavy system",
-    ],
-
-    insight:
-      "Even simple products require deep attention to user experience to feel reliable.",
-
-    demo: {
-      images: [
-        "/demo/nfc/digitalcard.jpeg",
-        "/demo/nfc/form.jpeg",
-      ],
+      images: ["/demo/eventbooking/home.jpeg"],
     },
   },
 ];
 
+export const projects = featuredProjects;
+
 export function getProjectBySlug(slug: string) {
-  return projects.find((project) => project.slug === slug);
+  return featuredProjects.find((project) => project.slug === slug);
 }
 
-export const skills = {
-  languages: ["C", "C++", "Java", "JavaScript", "C#"],
+export const moreWork: SecondaryProject[] = [
+  {
+    slug: "halal-travels",
+    title: "Halal Travels",
+    description:
+      "A flight booking platform integrating a third-party flight API, with retry handling, rate-limit management, and the operational plumbing that keeps bookings reliable.",
+    tech: ["Next.js", "Node.js", "Almosafer API", "Supabase"],
+  },
+  {
+    slug: "easy-entry",
+    title: "EasyEntry",
+    description:
+      "An event ticketing platform with multi-role workflows, QR-based entry, coupons, checkout, and fee distribution logic.",
+    tech: ["React", "Express", "Supabase", "QR Scanner"],
+  },
+  {
+    slug: "simple-ops",
+    title: "SimpleOps",
+    description:
+      "An internal ops dashboard built with Next.js and Supabase for streamlined business workflow management.",
+    tech: ["Next.js", "Supabase", "Tailwind CSS"],
+  },
+];
 
-  technologies: [
-    "React",
-    "Next.js",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "Supabase",
-    "Unity",
-  ],
-
-  toolsAndConcepts: [
-    "REST API Integration",
-    "Role-Based Access Control",
-    "System Architecture",
-    "Database Modeling",
-    "Workflow Design",
-    "Backend Refactoring",
-    "Git",
-  ],
-};
-
-export const experience = [
+export const experience: ExperienceItem[] = [
+  {
+    role: "Lead Developer",
+    company: "Upsow",
+    period: "2026 – Present",
+    points: [
+      "Leading full-stack development of a fintech product: Flutter apps, backend APIs, PostgreSQL infrastructure, admin systems, authentication, real-time communication, deployment, and the underlying architecture.",
+      "Architected real-time WebSocket communication layer and transactional credit/repayment engine.",
+      "Maintained production deployment pipelines using PM2, Nginx, Docker, and GitHub Actions.",
+    ],
+  },
   {
     role: "Full Stack Developer",
     company: "Athryan Tech Solutions",
-    period: "Sep 2025 – Present",
-
+    period: "2025 – Present",
     points: [
-      "Built full-stack systems using React, Node.js, and MongoDB under evolving client requirements",
-      "Structured backend workflows for HR platforms, booking systems, and CMS tools",
-      "Integrated third-party APIs and handled real-world operational edge cases",
-      "Refactored backend architecture to improve maintainability and scalability",
-      "Designed systems capable of adapting to unclear and shifting requirements",
+      "Delivered 8+ production projects across fintech, HR, travel, events, campaigns, and enterprise systems.",
+      "Frontend, backend, database design, third-party integrations, deployment, and enough time in production debugging to know what actually breaks in the real world versus what breaks in a demo.",
+      "Engineered high-scale digital business card platform for City Union Bank (5,000 physical cards).",
     ],
   },
-
   {
-    role: "Technical Lead",
+    role: "CTO / Technical Lead",
     company: "ImmersiveMed Solutions",
     period: "2025 – Present",
-
     points: [
-      "Leading development of VR-based healthcare simulations using Unity and C#",
-      "Designing immersive medical learning and visualization environments",
-      "Defining technical architecture and product direction for healthcare-focused VR systems",
-      "Exploring the intersection of healthcare, simulation, and interactive learning",
-    ],
-  },
-
-  {
-    role: "Live Project Intern",
-    company: "Vivnovation",
-    period: "Aug 2025 – Oct 2025",
-
-    points: [
-      "Developed Unity-based 3D training modules for US healthcare workflow understanding",
-      "Worked on insurance claim documentation using EMR data",
-      "Structured and processed physician claim workflows",
-      "Gained exposure to real-world healthcare operations and data systems",
+      "Leading technical development of immersive healthcare products, combining XR, 3D modeling, and biomedical engineering with software development.",
+      "Architecting spatial computing medical simulations and virtual anatomy platforms.",
     ],
   },
 ];
 
-export const additionalExperience: AdditionalExperienceItem[] = [
-  {
-    title: "Biomedical Engineering",
+export const technicalArsenal = {
+  frontend: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Flutter"],
+  backend: ["Node.js", "Express", "REST APIs", "WebSockets"],
+  databases: ["PostgreSQL", "MongoDB", "Supabase", "Redis"],
+  languages: ["JavaScript", "TypeScript", "Dart", "Python", "C", "C++", "C#", "Java"],
+  infrastructure: ["Linux", "Ubuntu", "PM2", "Nginx", "Docker", "GitHub Actions", "CI/CD", "Git"],
+  xrAndEngineering: ["Unity", "Blender", "OpenCV", "MATLAB", "3D Slicer"],
+};
 
-    description:
-      "Background in biomedical systems, physiology-driven thinking, and healthcare-focused problem solving.",
-  },
+export const education = {
+  degree: "B.E. Biomedical Engineering",
+  institution: "Dr. N.G.P. Institute of Technology, Coimbatore",
+  metrics: "CGPA: 8.5 · Minor in Internet of Things",
+  description:
+    "I started in biomedical systems and embedded technology before moving into full-stack product engineering. The two fields are closer than they sound on paper.",
+};
 
-  {
-    title: "Minor in IoT",
-
-    description:
-      "Exposure to embedded systems, sensors, hardware integration, and connected system design.",
-  },
-
-  {
-    title: "YI Yuva Event Coordinator",
-
-    description:
-      "Handled planning, coordination, execution, logistics, and team collaboration across events.",
-  },
-];
+export const beyondCode = {
+  writing:
+    "Outside engineering, I write. Under the name House Zaven, I publish poetry and long-form pieces, and I'm building it into a proper personal brand, digital product included. It runs on a different rhythm than my dev work, but it comes from the same instinct: I like making things that reach people directly, whether that's through a line of code or a line of writing.",
+  leadership:
+    "I've also spent time on public speaking and leadership through Young Indians YUVA and Toastmasters, proof that I can hold a room even without a keyboard in front of me.",
+};
 
 export const contact = {
-  text: "If you're building something complex and need someone who can take ownership, adapt fast, and build systems that work beyond the prototype stage — let’s talk.",
-};
-
-export const personal = {
-  name: "Naveen MV",
-
-  title: "Full Stack Developer • Systems Builder",
-
-  tagline: "I build systems that survive real-world chaos.",
-
-  heroDescription:
-    "I work on products where requirements shift, systems evolve, and clarity rarely exists from the start. From HR platforms and booking systems to immersive healthcare simulations, I build systems designed for real-world environments.",
-
-  about: [
-    "Most of my experience comes from building products in environments where requirements constantly evolve.",
-    "I enjoy solving workflow, architecture, and system-level problems rather than simply building interfaces.",
-    "I work across frontend and backend, focusing on systems that remain maintainable, scalable, and reliable under real-world pressure.",
-    "Alongside web development, I’m building VR-based healthcare simulations through ImmersiveMed Solutions.",
-    "I care deeply about ownership, adaptability, and building products that function beyond the demo stage.",
-  ],
-
+  heading: "Let's build something useful.",
+  subtext: "Open to conversations around full-stack engineering, product development, fintech, and healthcare technology.",
   email: "mvnaveen18@gmail.com",
-
   linkedin: "https://www.linkedin.com/in/naveen-mv-8432b3232",
+  github: "https://github.com/mvnaveen18",
 };
-
-export const workStyle = [
-  "I build even when the roadmap is unclear",
-  "I adapt quickly when systems and requirements change",
-  "I focus on solving operational problems, not just writing code",
-  "I think in workflows, scalability, and maintainability",
-  "I take ownership instead of waiting for perfect instructions",
-];

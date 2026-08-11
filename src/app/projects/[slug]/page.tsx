@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { getProjectBySlug, projects } from "@/data/portfolio";
 import { notFound } from "next/navigation";
 
@@ -39,25 +39,33 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
     <main className="mx-auto min-h-screen w-full max-w-5xl px-5 pb-20 pt-10 text-[var(--foreground)]">
       <div className="mb-10 flex items-center justify-between gap-4 border-b border-[var(--border)] pb-6">
         <Link
-          href="/#projects"
+          href="/#featured-work"
           className="ripple-button hover-depth inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Projects
         </Link>
 
-        <span className="text-xs tracking-[0.12em] text-[var(--muted)] uppercase">Case Study</span>
+        <span className="text-xs font-mono tracking-widest text-[var(--accent)] uppercase">Case Study</span>
       </div>
 
       <section className="space-y-5">
-        <h1 className="max-w-4xl text-3xl font-semibold tracking-tight sm:text-5xl">{project.title}</h1>
-        <p className="max-w-3xl text-base leading-7 text-[var(--muted)] sm:text-lg">{project.overview}</p>
+        <div className="space-y-2">
+          {project.role ? (
+            <span className="inline-block rounded-full border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+              {project.role}
+            </span>
+          ) : null}
+          <h1 className="max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl">{project.title}</h1>
+        </div>
+
+        <p className="max-w-3xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">{project.overview}</p>
 
         <div className="flex flex-wrap gap-2 pt-2">
           {project.tech.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-xs text-[var(--muted)]"
+              className="rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-xs font-medium text-[var(--foreground)]"
             >
               {tag}
             </span>
@@ -67,83 +75,52 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
 
       <div className="mt-12 grid gap-6 lg:grid-cols-2">
         <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Key Features</h2>
+          <h2 className="mb-4 text-xl font-bold tracking-tight">Key System Capabilities</h2>
           <ul className="space-y-3 text-sm text-[var(--muted)]">
             {project.features.map((feature) => (
-              <li key={feature} className="flex items-start gap-2">
-                <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
-                <span>{feature}</span>
+              <li key={feature} className="flex items-start gap-2.5">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
+                <span className="leading-relaxed">{feature}</span>
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Role & Contributions</h2>
-          <ul className="space-y-3 text-sm text-[var(--muted)]">
-            {project.role.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-
-      <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Impact</h2>
-          <ul className="space-y-3 text-sm text-[var(--muted)]">
-            {project.impact.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Insight</h2>
-          <p className="text-sm leading-7 text-[var(--muted)]">{project.insight}</p>
-        </section>
-      </div>
-
-      {project.demo ? (
-        <section className="hover-depth mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-          <h2 className="mb-4 text-xl font-semibold tracking-tight">Demo</h2>
-          {project.demo.images.length > 0 ? (
-            <div className="grid gap-4 md:grid-cols-2">
-              {project.demo.images.map((image, index) => (
-                <div key={image} className="relative aspect-video overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)]">
-                  <Image
-                    src={image}
-                    alt={`${project.title} demo ${index + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
+        {project.roleDetails && project.roleDetails.length > 0 ? (
+          <section className="hover-depth rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+            <h2 className="mb-4 text-xl font-bold tracking-tight">Engineering Ownership</h2>
+            <ul className="space-y-3 text-sm text-[var(--muted)]">
+              {project.roleDetails.map((item) => (
+                <li key={item} className="flex items-start gap-2.5">
+                  <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
+                  <span className="leading-relaxed">{item}</span>
+                </li>
               ))}
-            </div>
-          ) : (
-            <p className="text-sm leading-7 text-[var(--muted)]">Demo assets ready to be added.</p>
-          )}
-          {project.demo.video ? <p className="mt-3 text-sm text-[var(--muted)]">Video: {project.demo.video}</p> : null}
+            </ul>
+          </section>
+        ) : null}
+      </div>
+
+      {project.demo && project.demo.images.length > 0 ? (
+        <section className="hover-depth mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 space-y-4">
+          <h2 className="text-xl font-bold tracking-tight">Platform Demo Screenshots</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {project.demo.images.map((image, index) => (
+              <div
+                key={image}
+                className="relative aspect-video overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)]"
+              >
+                <Image
+                  src={image}
+                  alt={`${project.title} screenshot ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
         </section>
       ) : null}
-
-      <section className="hover-depth mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-        <h2 className="mb-4 text-xl font-semibold tracking-tight">Challenges & Learnings</h2>
-        <ul className="space-y-3 text-sm text-[var(--muted)]">
-          {project.challenges.map((item) => (
-            <li key={item} className="flex items-start gap-2">
-              <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
     </main>
   );
 }
