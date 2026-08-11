@@ -9,7 +9,12 @@ type ContactPayload = {
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as ContactPayload;
+  let body: ContactPayload = {};
+  try {
+    body = (await request.json()) as ContactPayload;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON payload." }, { status: 400 });
+  }
 
   const name = body.name?.trim();
   const email = body.email?.trim();
@@ -45,9 +50,20 @@ export async function POST(request: Request) {
       }),
     });
 
+    const rawText = await formSubmitResponse.text();
+    let resData: { success?: string | boolean; message?: string } = {};
+
+    try {
+      resData = JSON.parse(rawText);
+    } catch {
+      // If FormSubmit returned HTML (e.g. initial email activation page)
+      if (!formSubmitResponse.ok) {
+        throw new Error("Email service activation pending. Please check your inbox at mvnaveen18@gmail.com.");
+      }
+    }
+
     if (!formSubmitResponse.ok) {
-      const errorData = (await formSubmitResponse.json()) as { message?: string };
-      throw new Error(errorData.message ?? "FormSubmit service error");
+      throw new Error(resData.message ?? "Failed to send message via FormSubmit.");
     }
   } catch (error) {
     return NextResponse.json(

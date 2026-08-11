@@ -35,8 +35,16 @@ export function ContactForm() {
         body: JSON.stringify(form),
       });
 
+      const textData = await response.text();
+      let data: { error?: string; success?: boolean } = {};
+
+      try {
+        data = JSON.parse(textData);
+      } catch {
+        throw new Error("Unable to parse server response. Please try emailing mvnaveen18@gmail.com directly.");
+      }
+
       if (!response.ok) {
-        const data = (await response.json()) as { error?: string };
         throw new Error(data.error ?? "Submission failed");
       }
 
@@ -45,6 +53,8 @@ export function ContactForm() {
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Something went wrong. Try again.");
       }
       setStatus("error");
     }
