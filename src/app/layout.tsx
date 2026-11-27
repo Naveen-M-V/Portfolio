@@ -38,6 +38,11 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
+  icons: {
+    icon: "/LogoHZ.png",
+    shortcut: "/LogoHZ.png",
+    apple: "/LogoHZ.png",
+  },
 };
 
 export default function RootLayout({

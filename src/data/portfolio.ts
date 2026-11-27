@@ -218,6 +218,54 @@ export const featuredProjects: Project[] = [
       "Integrated biomedical pathology models into interactive training modules",
     ],
   },
+
+  {
+    slug: "billyourway-pos-billing",
+    title: "BillYourWay: Offline-First POS & Billing",
+    role: "Full Stack Developer",
+    description:
+      "An offline-first, multi-tenant POS, inventory, and Khata billing suite built for retail and wholesale stores. Engineered to keep counter billing instant even when the network drops, then reconcile cleanly with PostgreSQL.",
+    overview:
+      "Built across a unified Flutter client (Windows desktop, Android, iOS, and web) and a Node.js/Express backend backed by PostgreSQL with 32 versioned migrations. Combines local Drift (SQLite) persistence and a background sync queue with split-screen POS billing, dual camera/USB barcode scanning, GST invoicing, 58mm/80mm thermal printing, supplier purchases, and customer/vendor Khata ledgers.",
+    features: [
+      "Offline-first Drift (SQLite) storage with background sync queue & connectivity recovery",
+      "Split-screen POS register with camera & USB hardware barcode scanning and parked orders",
+      "Customer & supplier Khata ledgers tracking receivables, payables, and partial settlements",
+      "58mm/80mm thermal receipt printing, PDF GST invoices, and WhatsApp sharing hooks",
+      "Multi-tenant RBAC, staff approval workflows, floor-price protection, and stock audit trails",
+    ],
+    tech: ["Flutter", "Dart", "Riverpod", "Drift (SQLite)", "Node.js", "Express", "PostgreSQL", "JWT"],
+    roleDetails: [
+      "Architected the offline-first sync engine bridging local Drift (SQLite) storage with PostgreSQL",
+      "Designed 32 versioned SQL migrations covering multi-tenant POS, inventory, purchases, and Khata ledgers",
+      "Implemented dual barcode scanning, thermal ESC/POS printing, and PDF invoice generation",
+      "Built staff role permissions, delegated approval monitors, and email OTP verification",
+    ],
+  },
+
+  {
+    slug: "taskitup-workspace",
+    title: "TaskItUp: Team Task & Collaboration Platform",
+    role: "Full Stack Developer",
+    description:
+      "A real-time team task management and collaboration workspace built for Upsow across web and mobile. Connects Kanban workflows, project tracking, calendar scheduling, and team chat through an atomic transaction and event-dispatcher pipeline.",
+    overview:
+      "Built with a React + TypeScript web client, a Flutter mobile companion app, and a Node.js/Express backend backed by PostgreSQL and Socket.io. Every mutation flows through a strict Route -> Service -> Atomic Transaction -> Event Dispatcher pipeline that updates audit logs, evaluates notification rules, pushes Firebase mobile alerts, and broadcasts live state to connected rooms.",
+    features: [
+      "5-column drag-and-drop Kanban board, My Work view, and multi-filter Calendar",
+      "Real-time project channels and direct messaging with @mentions via Socket.io",
+      "Atomic backend event dispatcher driving live socket pushes, audit logs, and in-app alerts",
+      "Flutter mobile companion app with GoRouter navigation and Firebase push notifications",
+      "Role-based access control (Admin, PM, Member), global search, and BLOB file attachments",
+    ],
+    tech: ["React", "TypeScript", "Flutter", "Node.js", "Express", "PostgreSQL", "Socket.io", "Firebase"],
+    roleDetails: [
+      "Engineered the Route -> Service -> Transaction -> Event Dispatcher backend architecture",
+      "Built the React Kanban, Calendar, Dashboard, and real-time Chat interfaces",
+      "Developed the Flutter mobile client with Socket.io sync and Firebase Cloud Messaging",
+      "Implemented RBAC, cross-entity global search, and database-backed attachment streaming",
+    ],
+  },
 ];
 
 export const projects = featuredProjects;
